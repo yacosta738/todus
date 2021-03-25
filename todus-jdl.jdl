@@ -1,0 +1,29 @@
+entity Tweets {
+    content String required maxlength(160)
+    createdAt Instant,
+    updatedAt Instant
+}
+
+entity Customer {
+    slug String
+    createdAt Instant,
+    updatedAt Instant
+}
+
+relationship ManyToOne {
+    Customer{user(login)} to User
+}
+
+relationship OneToMany {
+    Customer to Tweets
+}
+relationship ManyToMany{
+	Customer{follower} to Customer{followed}
+}
+// Use Data Transfer Objects (DTO)
+dto * with mapstruct
+
+// Set service options to all
+service all with serviceClass
+
+paginate Tweets with infinite-scroll
