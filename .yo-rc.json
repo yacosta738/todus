@@ -43,6 +43,6 @@
     "clientThemeVariant": "",
     "languages": ["en", "es"],
     "entities": ["Tweets", "Customer"],
-    "lastLiquibaseTimestamp": 1616622273000
+    "lastLiquibaseTimestamp": 1616635895000
   }
 }

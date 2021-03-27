@@ -1,0 +1,27 @@
+{
+  "todusApp": {
+    "tweets": {
+      "home": {
+        "title": "Tweets",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Tweets",
+        "createOrEditLabel": "Create or edit a Tweets",
+        "notFound": "No Tweets found"
+      },
+      "created": "A new Tweets is created with identifier {{ param }}",
+      "updated": "A Tweets is updated with identifier {{ param }}",
+      "deleted": "A Tweets is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Tweets {{ id }}?"
+      },
+      "detail": {
+        "title": "Tweets"
+      },
+      "id": "ID",
+      "content": "Content",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At",
+      "customer": "Customer"
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "todusApp": {
+    "tweets": {
+      "home": {
+        "title": "Tweets",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Tweets",
+        "createOrEditLabel": "Crear o editar Tweets",
+        "notFound": "Ningún Tweets encontrado"
+      },
+      "created": "Un nuevo Tweets ha sido creado con el identificador {{ param }}",
+      "updated": "Un Tweets ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Tweets ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Tweets {{ id }}?"
+      },
+      "detail": {
+        "title": "Tweets"
+      },
+      "id": "ID",
+      "content": "Content",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At",
+      "customer": "Customer"
+    }
+  }
+}

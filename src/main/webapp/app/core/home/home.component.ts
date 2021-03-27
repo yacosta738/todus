@@ -1,8 +1,10 @@
 import Component from 'vue-class-component';
-import { Inject, Vue } from 'vue-property-decorator';
+import {Inject, Vue} from 'vue-property-decorator';
 import LoginService from '@/account/login.service';
+import NewTweetTextarea from "@/shared/components/new-tweet-textarea/new-tweet-textarea.vue";
+import TweetsWrapper from "@/shared/components/tweets-wrapper/tweets-wrapper.vue";
 
-@Component
+@Component({components: {NewTweetTextarea, TweetsWrapper}})
 export default class Home extends Vue {
   @Inject('loginService')
   private loginService: () => LoginService;

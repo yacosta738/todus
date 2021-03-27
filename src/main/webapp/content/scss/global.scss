@@ -1,264 +1,241 @@
-@import 'bootstrap-variables';
 
-/* ==============================================================
-Bootstrap tweaks
-===============================================================*/
+$themecolor: #1DA1F2;
+$lightgray: #E1E8ED;
+$extralightgray: #F5F8FA;
 
-body,
-h1,
-h2,
-h3,
-h4 {
-  font-weight: 300;
+
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+  background-color: var($extralightgray);
 }
 
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.5;
-  text-align: left;
-  color: #212529;
-  background: #e4e5e6;
-  background-color: #fff;
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: var($extralightgray);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var($lightgray);
+  border-radius: 3px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+* {
+  scrollbar-color: var($lightgray) var($extralightgray);
+  scrollbar-width: thin;
+}
+
+.twitter-color {
+  color: $themecolor;
+  fill: $themecolor;
+}
+
+.twitter-color-light {
+  color: lighten($themecolor, 25%);
+  fill: lighten($themecolor, 25%);
+}
+
+.twitter-extra-light-gray-bg {
+  background: #F5F8FA;
+}
+
+.twitter-light-gray-bg {
+  background: #E1E8ED;
 }
 
 a {
-  color: #533f03;
-  font-weight: bold;
+  color: $themecolor;
 }
 
-a:hover {
-  color: #533f03;
-  /* make sure browsers use the pointer cursor for anchors, even with no href */
-  cursor: pointer;
-}
-.dropdown-item:hover,
-.dropdown-item:focus {
-  color: white;
-  text-decoration: none;
-  background-color: #373a3c;
+.twitter-bg {
+  background: $themecolor;
 }
 
-/* ==========================================================================
-Browser Upgrade Prompt
-========================================================================== */
-.browserupgrade {
-  margin: 0.2em 0;
-  background: #ccc;
-  color: #000;
-  padding: 0.2em 0;
+.twitter-border {
+  border: 1px solid $themecolor;
 }
 
-/* ==========================================================================
-Main page styles
-========================================================================== */
-
-.hipster.img-fluid {
-  display: inline-block;
-  width: 347px;
-  height: 497px;
-  background: url('../images/jhipster_family_member_3.svg') no-repeat center top;
-  background-size: contain;
+.twitter-border-color {
+  border-color: $themecolor!important;
 }
 
-/* wait autoprefixer update to allow simple generation of high pixel density media query */
-@media only screen and (-webkit-min-device-pixel-ratio: 2),
-  only screen and (min--moz-device-pixel-ratio: 2),
-  only screen and (-o-min-device-pixel-ratio: 2/1),
-  only screen and (min-device-pixel-ratio: 2),
-  only screen and (min-resolution: 192dpi),
-  only screen and (min-resolution: 2dppx) {
-  .hipster {
-    background: url('../images/jhipster_family_member_3.svg') no-repeat center top;
-    background-size: contain;
-  }
+.twitter-border-color-light {
+  border-color: lighten($themecolor, 25%)!important;
 }
 
-/* ==========================================================================
-Generic styles
-========================================================================== */
-
-/* Error highlight on input fields */
-.valid[required],
-.valid.required {
-  border-left: 5px solid green;
+.transition-3 {
+  transition: 0.3s;
 }
 
-.invalid:not(form) {
-  border-left: 5px solid red;
+.light-blue-1 {
+  background-color: rgba(29, 161, 242, 0.1)
 }
 
-/* other generic styles */
-
-.jh-card {
-  padding: 1.5%;
-  margin-top: 20px;
-  border: none;
-}
-
-.error {
-  color: white;
-  background-color: red;
-}
-
-.pad {
-  padding: 10px;
-}
-
-.w-40 {
-  width: 40% !important;
-}
-
-.w-60 {
-  width: 60% !important;
-}
-
-.break {
-  white-space: normal;
-  word-break: break-all;
-}
-
-.readonly {
-  background-color: #eee;
-  opacity: 1;
-}
-
-.footer {
-  border-top: 1px solid rgba(0, 0, 0, 0.125);
-}
-
-.hand,
-[jhisortby] {
-  cursor: pointer;
-}
-
-/* ==========================================================================
-Custom alerts for notification
-========================================================================== */
-.alerts {
-  .alert {
-    text-overflow: ellipsis;
-    pre {
-      background: none;
-      border: none;
-      font: inherit;
-      color: inherit;
-      padding: 0;
-      margin: 0;
+.side-navigation-list-item {
+  a {
+    color: rgba(0, 0, 0, 0.9);
+    &:hover {
+      background-color: rgba(29, 161, 242, 0.1)
     }
-    .popover pre {
-      font-size: 10px;
+    &:focus {
+      background-color: rgba(29, 161, 242, 0.2)
     }
-  }
-  .toast {
-    position: fixed;
-    width: 100%;
-    &.left {
-      left: 5px;
+    i.icon {
+      width: 27px;
+      fill: rgb(41, 41, 41);
     }
-    &.right {
-      right: 5px;
-    }
-    &.top {
-      top: 55px;
-    }
-    &.bottom {
-      bottom: 55px;
+    &.active {
+      span {
+        color: $themecolor;
+      }
+      i.icon {
+        fill: $themecolor;
+      }
     }
   }
 }
 
-@media screen and (min-width: 480px) {
-  .alerts .toast {
-    width: 50%;
+.twitter-light-blue-on-hover {
+  &:hover {
+    background-color: rgba(29, 161, 242, 0.1)
   }
 }
 
-/* ==========================================================================
-entity tables helpers
-========================================================================== */
-
-/* Remove Bootstrap padding from the element
-http://stackoverflow.com/questions/19562903/remove-padding-from-columns-in-bootstrap-3 */
-@mixin no-padding($side) {
-  @if $side == 'all' {
-    .no-padding {
-      padding: 0 !important;
-    }
-  } @else {
-    .no-padding-#{$side} {
-      padding-#{$side}: 0 !important;
-    }
+.search-input-wrappper {
+  border: 1px solid transparent;
+  svg {
+    fill: rgba(0, 0, 0, 0.5);
   }
-}
-@include no-padding('left');
-@include no-padding('right');
-@include no-padding('top');
-@include no-padding('bottom');
-@include no-padding('all');
-
-/* bootstrap 3 input-group 100% width
-http://stackoverflow.com/questions/23436430/bootstrap-3-input-group-100-width */
-.width-min {
-  width: 1% !important;
-}
-
-/* ==========================================================================
-entity detail page css
-========================================================================== */
-.row.jh-entity-details {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  column-gap: 10px;
-  line-height: 1.5;
-}
-
-@media screen and (min-width: 768px) {
-  .row.jh-entity-details > {
-    dt {
-      float: left;
-      overflow: hidden;
-      clear: left;
-      text-align: right;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      padding: 0.5em 0;
-    }
-    dd {
-      border-bottom: 1px solid #eee;
-      padding: 0.5em 0;
-      margin-left: 0;
+  input {
+    font-size: 15px;
+    &::placeholder {
+      color: rgba(0, 0, 0, 0.5);
     }
   }
 }
 
-/* ==========================================================================
-ui bootstrap tweaks
-========================================================================== */
-.nav,
-.pagination,
-.carousel,
-.card-title a {
-  cursor: pointer;
+.trend-block {
+  background: $extralightgray;
+  .trend-list {
+    li.trend-list-item {
+      transition: 0.3s;
+      border-bottom: 1px solid $lightgray;
+      &:hover {
+        background: darken($extralightgray, 2%);
+      }
+      &:last-child {
+        border: none;
+      }
+    }
+  }
 }
 
-.datetime-picker-dropdown > li.date-picker-menu div > table .btn-secondary,
-.uib-datepicker-popup > li > div.uib-datepicker > table .btn-secondary {
-  border: 0;
+li.who-to-follow-list-item {
+  transition: 0.3s;
+  border-bottom: 1px solid $lightgray;
+  &:hover {
+    background: darken($extralightgray, 2%);
+  }
+  &:last-child {
+    border: none;
+  }
 }
 
-.datetime-picker-dropdown > li.date-picker-menu div > table:focus,
-.uib-datepicker-popup > li > div.uib-datepicker > table:focus {
-  outline: none;
+.footer-item-link {
+  font-size: 13px;
 }
 
-.thread-dump-modal-lock {
-  max-width: 450px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+.magic-icon {
+  margin-top: -4px;
 }
 
-/* jhipster-needle-scss-add-main JHipster will add new css style */
+.new-tweet-textarea {
+  .textarea {
+    font-size: 20px;
+    textarea {
+      &::placeholder {
+        color: rgba(0, 0, 0, 0.5);
+      }
+    }
+  }
+}
+
+.hr-bar {
+  hr {
+    background: #E6ECF0;
+  }
+}
+
+.tweet-footer {
+  .ficon {
+    width: 39px;
+    height: 39px;
+    padding: 9px;
+  }
+  .ficon-text {
+    margin-top: 8px;
+    font-size: 16px;
+  }
+  .ficon-wrapper.comment {
+    &:hover {
+      .comment {
+        background: lighten($themecolor, 40%);
+      }
+      span {
+        color: $themecolor;
+      }
+    }
+  }
+  .ficon-wrapper.retweet {
+    &:hover {
+      .retweet {
+        background: rgba(54, 215, 121, 0.15);
+      }
+      span {
+        color: #2ecc71;
+      }
+    }
+  }
+  .ficon-wrapper.like {
+    &:hover {
+      .like {
+        background: rgba(192, 58, 43, 0.1);
+      }
+      span {
+        color: #e74c3c;
+      }
+    }
+  }
+  .ficon-wrapper.send {
+    &:hover {
+      .send {
+        background: rgba(52, 152, 219, 0.1);
+      }
+      span {
+        color: #3498db;
+      }
+    }
+  }
+  svg {
+    fill: rgba(91, 91, 91, 0.76);
+  }
+}
+
+.tweet-username {
+  .tweet-user-info {
+    .inner {
+      width: 320px;
+      box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.1), -1px -1px 8px rgba(0, 0, 0, 0.1), ;
+    }
+  }
+  &:hover {
+    .tweet-user-info {
+      display: block;
+    }
+  }
+  .tweet-user-info {
+    top: 100%;
+  }
+}
