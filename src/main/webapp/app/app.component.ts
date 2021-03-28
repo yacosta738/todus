@@ -7,6 +7,8 @@ import RightMenu from '@/core/right-menu/right-menu.vue';
 import LoginForm from '@/account/login/login.vue';
 
 import '@/shared/config/dayjs';
+import TranslationService from "@/locale/translation.service";
+import { Inject } from 'vue-property-decorator';
 
 @Component({
   components: {
@@ -18,7 +20,10 @@ import '@/shared/config/dayjs';
   },
 })
 export default class App extends Vue {
-  mounted():void {
-
+  @Inject('translationService') private translationService: () => TranslationService;
+  private currentLanguage = this.$store.getters.currentLanguage;
+  private languages: any = this.$store.getters.languages;
+  created() {
+    this.translationService().refreshTranslation(this.currentLanguage);
   }
 }

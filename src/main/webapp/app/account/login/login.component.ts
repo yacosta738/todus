@@ -10,7 +10,7 @@ export default class Login extends mixins(LayoutMixin) {
   public authenticationError = null;
   public login = null;
   public password = null;
-  public rememberMe: boolean = null;
+  public rememberMe: boolean = false;
 
   public doLogin(): void {
     const data = { username: this.login, password: this.password, rememberMe: this.rememberMe };
@@ -29,7 +29,6 @@ export default class Login extends mixins(LayoutMixin) {
           }
         }
         this.authenticationError = false;
-        this.$root.$emit('bv::hide::modal', 'login-page');
         this.accountService().retrieveAccount();
       })
       .catch(() => {

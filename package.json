@@ -102,6 +102,7 @@
   },
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^4.0.0",
+    "@tailwindcss/custom-forms": "^0.2.1",
     "@types/jest": "26.0.20",
     "@types/node": "14.14.35",
     "@types/sinon": "9.0.11",
