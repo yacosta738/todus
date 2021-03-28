@@ -36,6 +36,6 @@ export default class Activate extends Vue {
   }
 
   public openLogin(): void {
-    this.loginService().openLogin((<any>this).$root);
+    this.loginService().openLogin();
   }
 }

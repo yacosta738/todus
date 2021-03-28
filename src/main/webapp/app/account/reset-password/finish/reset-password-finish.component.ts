@@ -63,6 +63,6 @@ export default class ResetPasswordFinish extends Vue {
   }
 
   public openLogin() {
-    this.loginService().openLogin((<any>this).$root);
+    this.loginService().openLogin();
   }
 }

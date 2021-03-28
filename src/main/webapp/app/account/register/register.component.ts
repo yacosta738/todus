@@ -77,6 +77,6 @@ export default class Register extends Vue {
   }
 
   public openLogin(): void {
-    this.loginService().openLogin((<any>this).$root);
+    this.loginService().openLogin();
   }
 }

@@ -1,15 +1,10 @@
 import axios from 'axios';
-import Component from 'vue-class-component';
-import { Vue, Inject } from 'vue-property-decorator';
+import { Component, Inject } from 'vue-property-decorator';
 import AccountService from '@/account/account.service';
-@Component({
-  watch: {
-    $route() {
-      this.$root.$emit('bv::hide::modal', 'login-page');
-    },
-  },
-})
-export default class LoginForm extends Vue {
+import LayoutMixin from "@/shared/mixin/layout.mixin";
+import { mixins } from 'vue-class-component';
+@Component
+export default class Login extends mixins(LayoutMixin) {
   @Inject('accountService')
   private accountService: () => AccountService;
   public authenticationError = null;

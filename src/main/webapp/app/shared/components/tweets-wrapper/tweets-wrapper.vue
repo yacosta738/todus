@@ -2,7 +2,7 @@
   <!-- tweets wrapper start -->
   <div class="tweets-wrapper">
     <div class="innner">
-      <tweet v-for="i in 50"></tweet>
+      <tweet v-for="i in 25" :key="i"></tweet>
     </div>
   </div>
   <!-- tweets wrapper end -->

@@ -6,8 +6,8 @@ import router from '@/router';
 import TranslationService from '@/locale/translation.service';
 
 import * as config from '@/shared/config/config';
-import LoginForm from '@/account/login-form/login-form.vue';
-import LoginFormClass from '@/account/login-form/login-form.component';
+import LoginForm from '@/account/login/login.vue';
+import LoginFormClass from '@/account/login/login.component';
 
 const localVue = createLocalVue();
 localVue.component('b-alert', {});

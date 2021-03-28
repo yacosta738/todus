@@ -6,11 +6,11 @@
       <div class="w-auto">
         <!-- tweet user img start -->
         <div class="tweet-user-img">
-                                            <span class="w-12 rounded-full overflow-hidden mr-2">
-                                                <img
-                                                  src="https://pbs.twimg.com/profile_images/654628951109693440/SZd75JU3_bigger.jpg"
-                                                  alt="tweet user image">
-                                            </span>
+          <span class="w-12 rounded-full overflow-hidden mr-2">
+              <img
+                src="https://pbs.twimg.com/profile_images/654628951109693440/SZd75JU3_bigger.jpg"
+                alt="tweet user image">
+          </span>
         </div>
         <!-- tweet user img end -->
       </div>

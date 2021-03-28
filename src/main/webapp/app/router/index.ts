@@ -23,7 +23,8 @@ export default new Router({
     {
       path: '/',
       name: 'Home',
-      component: Home
+      component: Home,
+      meta: {authorities: ['ROLE_USER']}
     },
     {
       path: '/forbidden',

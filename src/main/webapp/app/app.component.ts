@@ -4,7 +4,7 @@ import Ribbon from '@/core/ribbon/ribbon.vue';
 import JhiNavbar from '@/core/jhi-navbar/jhi-navbar.vue';
 import LeftMenu from '@/core/left-menu/left-menu.vue';
 import RightMenu from '@/core/right-menu/right-menu.vue';
-import LoginForm from '@/account/login-form/login-form.vue';
+import LoginForm from '@/account/login/login.vue';
 
 import '@/shared/config/dayjs';
 
@@ -17,4 +17,8 @@ import '@/shared/config/dayjs';
     'jhi-navbar': JhiNavbar,
   },
 })
-export default class App extends Vue {}
+export default class App extends Vue {
+  mounted():void {
+
+  }
+}

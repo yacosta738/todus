@@ -1,9 +1,10 @@
-import Component from 'vue-class-component';
-import { Vue, Inject } from 'vue-property-decorator';
+import {Component, Inject } from 'vue-property-decorator';
 import LoginService from '@/account/login.service';
+import LayoutMixin from "@/shared/mixin/layout.mixin";
+import { mixins } from 'vue-class-component';
 
 @Component
-export default class Error extends Vue {
+export default class Error extends mixins(LayoutMixin) {
   @Inject('loginService')
   private loginService: () => LoginService;
   errorMessage: string = null;
@@ -38,7 +39,7 @@ export default class Error extends Vue {
     this.error404 = error404;
 
     if (!this.$store.getters.authenticated && this.error403) {
-      this.loginService().openLogin((<any>this).$root);
+      this.loginService().openLogin();
     }
   }
 }

@@ -43,7 +43,7 @@ export default class LeftMenu extends Vue {
   }
 
   public openLogin(): void {
-    this.loginService().openLogin((<any>this).$root);
+    this.loginService().openLogin();
   }
 
   public get authenticated(): boolean {

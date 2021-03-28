@@ -43,6 +43,9 @@
     "clientThemeVariant": "",
     "languages": ["en", "es"],
     "entities": ["Tweets", "Customer"],
-    "lastLiquibaseTimestamp": 1616635895000
+    "lastLiquibaseTimestamp": 1616635895000,
+    "herokuAppName": "todus",
+    "herokuDeployType": "git",
+    "herokuJavaVersion": "11"
   }
 }
