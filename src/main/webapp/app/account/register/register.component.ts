@@ -1,9 +1,12 @@
-import Vue from 'vue';
-import { Component, Inject } from 'vue-property-decorator';
-import { email, helpers, maxLength, minLength, required, sameAs } from 'vuelidate/lib/validators';
+import {Component, Inject} from 'vue-property-decorator';
+import {email, helpers, maxLength, minLength, required, sameAs} from 'vuelidate/lib/validators';
 import LoginService from '@/account/login.service';
 import RegisterService from '@/account/register/register.service';
-import { EMAIL_ALREADY_USED_TYPE, LOGIN_ALREADY_USED_TYPE } from '@/constants';
+import {EMAIL_ALREADY_USED_TYPE, LOGIN_ALREADY_USED_TYPE} from '@/constants';
+import LayoutMixin from "@/shared/mixin/layout.mixin";
+import {mixins} from 'vue-class-component';
+import Alerts from "@/shared/components/alerts/alerts.vue";
+import {alertError, alertSuccess} from "@/shared/components/alerts/alert-type.enum";
 
 const loginPattern = helpers.regex('alpha', /^[a-zA-Z0-9!$&*+=?^_`{|}~.-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$|^[_.@A-Za-z0-9-]+$/);
 const validations: any = {
@@ -31,16 +34,16 @@ const validations: any = {
     minLength: minLength(4),
     maxLength: maxLength(50),
     // prettier-ignore
-    sameAsPassword: sameAs(function() {
+    sameAsPassword: sameAs(function () {
       return this.registerAccount.password;
     }),
   },
 };
 
 @Component({
-  validations,
+  validations, components: {Alerts}
 })
-export default class Register extends Vue {
+export default class Register extends mixins(LayoutMixin) {
   @Inject('registerService') private registerService: () => RegisterService;
   @Inject('loginService') private loginService: () => LoginService;
   public registerAccount: any = {
@@ -78,5 +81,13 @@ export default class Register extends Vue {
 
   public openLogin(): void {
     this.loginService().openLogin();
+  }
+
+  get typeError() {
+    return alertError;
+  }
+
+  get typeSuccess() {
+    return alertSuccess;
   }
 }

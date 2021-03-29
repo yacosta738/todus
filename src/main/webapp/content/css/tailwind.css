@@ -3,4 +3,13 @@
 body{
   @apply bg-white;
 }
+.valid{
+  @apply border-green-600;
+}
+.invalid{
+  @apply border-red-600;
+}
+.form-text-error{
+  @apply text-sm text-red-500;
+}
 @tailwind utilities;

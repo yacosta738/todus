@@ -1,19 +1,22 @@
 import axios from 'axios';
-import { Component, Inject } from 'vue-property-decorator';
+import {Component, Inject} from 'vue-property-decorator';
 import AccountService from '@/account/account.service';
 import LayoutMixin from "@/shared/mixin/layout.mixin";
-import { mixins } from 'vue-class-component';
-@Component
+import {mixins} from 'vue-class-component';
+import Alerts from "@/shared/components/alerts/alerts.vue";
+import {alertError, messageText} from "@/shared/components/alerts/alert-type.enum";
+
+@Component({components: {Alerts}})
 export default class Login extends mixins(LayoutMixin) {
   @Inject('accountService')
   private accountService: () => AccountService;
-  public authenticationError = null;
+  public authenticationError = false;
   public login = null;
   public password = null;
   public rememberMe: boolean = false;
 
   public doLogin(): void {
-    const data = { username: this.login, password: this.password, rememberMe: this.rememberMe };
+    const data = {username: this.login, password: this.password, rememberMe: this.rememberMe};
     axios
       .post('api/authenticate', data)
       .then(result => {
@@ -34,5 +37,8 @@ export default class Login extends mixins(LayoutMixin) {
       .catch(() => {
         this.authenticationError = true;
       });
+  }
+  get alertError(){
+    return alertError;
   }
 }

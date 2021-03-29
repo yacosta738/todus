@@ -88,6 +88,7 @@
     "bootstrap": "4.6.0",
     "bootstrap-vue": "2.21.2",
     "dayjs": "1.10.4",
+    "reflect-metadata": "^0.1.13",
     "swagger-ui-dist": "3.45.0",
     "vue": "2.6.12",
     "vue-class-component": "7.2.6",

@@ -13,11 +13,11 @@
           "pattern": "Su nombre de usuario no es válido."
         }
       },
-      "success": "<strong>¡Registro guardado!</strong> Por favor, revise su correo electrónico para confirmar.",
+      "success": "¡Registro guardado!|Por favor, revise su correo electrónico para confirmar.",
       "error": {
-        "fail": "<strong>¡El registro ha fallado!</strong> Por favor, inténtelo de nuevo más tarde.",
-        "userexists": "<strong>¡El nombre de usuario ya está registrado!</strong> Por favor, escoja otro usuario.",
-        "emailexists": "<strong>¡El correo electrónico ya está en uso!</strong> Por favor, escoja otro email."
+        "fail": "¡El registro ha fallado!|Por favor, inténtelo de nuevo más tarde.",
+        "userexists": "¡El nombre de usuario ya está registrado!|Por favor, escoja otro usuario.",
+        "emailexists": "¡El correo electrónico ya está en uso!|Por favor, escoja otro email."
       }
     }
   }
