@@ -21,6 +21,8 @@
       "slug": "Slug",
       "createdAt": "Created At",
       "updatedAt": "Updated At",
+      "name": "Name",
+      "phone": "Phone",
       "tweets": "Tweets",
       "user": "User",
       "follower": "Follower",

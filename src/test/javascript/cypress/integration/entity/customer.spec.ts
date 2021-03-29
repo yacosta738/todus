@@ -94,6 +94,13 @@ describe('Customer e2e test', () => {
 
     cy.get(`[data-cy="updatedAt"]`).type('2021-03-24T13:16').invoke('val').should('equal', '2021-03-24T13:16');
 
+    cy.get(`[data-cy="name"]`).type('yellow', { force: true }).invoke('val').should('match', new RegExp('yellow'));
+
+    cy.get(`[data-cy="phone"]`)
+      .type('204-995-8947 x57634', { force: true })
+      .invoke('val')
+      .should('match', new RegExp('204-995-8947 x57634'));
+
     cy.setFieldSelectToLastOfEntity('user');
 
     cy.setFieldSelectToLastOfEntity('follower');

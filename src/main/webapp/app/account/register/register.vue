@@ -64,125 +64,126 @@
           </small>
         </div>
       </div>
-      <div class="mb-8 w-full">
-        <label class="block">
-          <input type="email"
-                 id="email"
-                 name="email"
-                 :class="{ valid: !$v.registerAccount.email.$invalid, invalid: $v.registerAccount.email.$invalid }"
-                 v-model="$v.registerAccount.email.$model"
-                 minlength="5"
-                 maxlength="254"
-                 email
-                 required
-                 v-bind:placeholder="$t('global.form[\'email.placeholder\']')"
-                 data-cy="email"
-                 class="form-input mt-1 block p-4 w-full border rounded border-gray-400 focus-within:border-blue-100">
-        </label>
 
-        <div v-if="$v.registerAccount.email.$anyDirty && $v.registerAccount.email.$invalid">
-          <small
-            class="form-text-error"
-            v-if="!$v.registerAccount.email.required"
-            v-text="$t('global.messages.validate.email.required')"
-          >
-            Your email is required.
-          </small>
-          <small
-            class="form-text-error"
-            v-if="!$v.registerAccount.email.email"
-            v-text="$t('global.messages.validate.email.invalid')"
-          >
-            Your email is invalid.
-          </small>
-          <small
-            class="form-text-error"
-            v-if="!$v.registerAccount.email.minLength"
-            v-text="$t('global.messages.validate.email.minlength')"
-          >
-            Your email is required to be at least 5 characters.
-          </small>
-          <small
-            class="form-text-error"
-            v-if="!$v.registerAccount.email.maxLength"
-            v-text="$t('global.messages.validate.email.maxlength')"
-          >
-            Your email cannot be longer than 100 characters.
-          </small>
-        </div>
-      </div>
-      <div class="mb-8 w-full">
-        <label class="block">
-          <input
-            type="password" id="firstPassword" name="password"
-            :class="{ valid: !$v.registerAccount.password.$invalid, invalid: $v.registerAccount.password.$invalid }"
-            v-model="$v.registerAccount.password.$model" minlength="4" maxlength="50" required
-            v-bind:placeholder="$t('global.form[\'newpassword.placeholder\']')" data-cy="firstPassword"
-            class="form-input mt-1 block p-4 w-full border rounded border-gray-400 focus-within:border-blue-100">
-        </label>
+        <div class="mb-8 w-full">
+          <label class="block">
+            <input type="email"
+                   id="email"
+                   name="email"
+                   :class="{ valid: !$v.registerAccount.email.$invalid, invalid: $v.registerAccount.email.$invalid }"
+                   v-model="$v.registerAccount.email.$model"
+                   minlength="5"
+                   maxlength="254"
+                   email
+                   required
+                   v-bind:placeholder="$t('global.form[\'email.placeholder\']')"
+                   data-cy="email"
+                   class="form-input mt-1 block p-4 w-full border rounded border-gray-400 focus-within:border-blue-100">
+          </label>
 
-        <div v-if="$v.registerAccount.password.$anyDirty && $v.registerAccount.password.$invalid">
-          <small
-            class="form-text-error"
-            v-if="!$v.registerAccount.password.required"
-            v-text="$t('global.messages.validate.newpassword.required')"
-          >
-            Your password is required.
-          </small>
-          <small
-            class="form-text-error"
-            v-if="!$v.registerAccount.password.minLength"
-            v-text="$t('global.messages.validate.newpassword.minlength')"
-          >
-            Your password is required to be at least 4 characters.
-          </small>
-          <small
-            class="form-text-error"
-            v-if="!$v.registerAccount.password.maxLength"
-            v-text="$t('global.messages.validate.newpassword.maxlength')"
-          >
-            Your password cannot be longer than 50 characters.
-          </small>
+          <div v-if="$v.registerAccount.email.$anyDirty && $v.registerAccount.email.$invalid">
+            <small
+              class="form-text-error"
+              v-if="!$v.registerAccount.email.required"
+              v-text="$t('global.messages.validate.email.required')"
+            >
+              Your email is required.
+            </small>
+            <small
+              class="form-text-error"
+              v-if="!$v.registerAccount.email.email"
+              v-text="$t('global.messages.validate.email.invalid')"
+            >
+              Your email is invalid.
+            </small>
+            <small
+              class="form-text-error"
+              v-if="!$v.registerAccount.email.minLength"
+              v-text="$t('global.messages.validate.email.minlength')"
+            >
+              Your email is required to be at least 5 characters.
+            </small>
+            <small
+              class="form-text-error"
+              v-if="!$v.registerAccount.email.maxLength"
+              v-text="$t('global.messages.validate.email.maxlength')"
+            >
+              Your email cannot be longer than 100 characters.
+            </small>
+          </div>
         </div>
-      </div>
-      <div class="mb-8 w-full">
-        <label class="block">
-          <input
-            type="password" id="secondPassword"
-            :class="{ valid: !$v.confirmPassword.$invalid, invalid: $v.confirmPassword.$invalid }"
-            v-model="$v.confirmPassword.$model" minlength="4" maxlength="50" required
-            v-bind:placeholder="$t('global.form[\'confirmpassword.placeholder\']')" data-cy="secondPassword"
-            class="form-input mt-1 block p-4 w-full border rounded border-gray-400 focus-within:border-blue-100">
-        </label>
-        <div v-if="$v.confirmPassword.$dirty && $v.confirmPassword.$invalid">
-          <small
-            class="form-text-error"
-            v-if="!$v.confirmPassword.required"
-            v-text="$t('global.messages.validate.confirmpassword.required')"
-          >
-            Your confirmation password is required.
-          </small>
-          <small
-            class="form-text-error"
-            v-if="!$v.confirmPassword.minLength"
-            v-text="$t('global.messages.validate.confirmpassword.minlength')"
-          >
-            Your confirmation password is required to be at least 4 characters.
-          </small>
-          <small
-            class="form-text-error"
-            v-if="!$v.confirmPassword.maxLength"
-            v-text="$t('global.messages.validate.confirmpassword.maxlength')"
-          >
-            Your confirmation password cannot be longer than 50 characters.
-          </small>
-          <small class="form-text-error" v-if="!$v.confirmPassword.sameAsPassword"
-                 v-text="$t('global.messages.error.dontmatch')">
-            The password and its confirmation do not match!
-          </small>
-        </div>
-      </div>
+        <div class="mb-8 w-full">
+          <label class="block">
+            <input
+              type="password" id="firstPassword" name="password"
+              :class="{ valid: !$v.registerAccount.password.$invalid, invalid: $v.registerAccount.password.$invalid }"
+              v-model="$v.registerAccount.password.$model" minlength="4" maxlength="50" required
+              v-bind:placeholder="$t('global.form[\'newpassword.placeholder\']')" data-cy="firstPassword"
+              class="form-input mt-1 block p-4 w-full border rounded border-gray-400 focus-within:border-blue-100">
+          </label>
 
+          <div v-if="$v.registerAccount.password.$anyDirty && $v.registerAccount.password.$invalid">
+            <small
+              class="form-text-error"
+              v-if="!$v.registerAccount.password.required"
+              v-text="$t('global.messages.validate.newpassword.required')"
+            >
+              Your password is required.
+            </small>
+            <small
+              class="form-text-error"
+              v-if="!$v.registerAccount.password.minLength"
+              v-text="$t('global.messages.validate.newpassword.minlength')"
+            >
+              Your password is required to be at least 4 characters.
+            </small>
+            <small
+              class="form-text-error"
+              v-if="!$v.registerAccount.password.maxLength"
+              v-text="$t('global.messages.validate.newpassword.maxlength')"
+            >
+              Your password cannot be longer than 50 characters.
+            </small>
+          </div>
+        </div>
+        <div class="mb-8 w-full">
+          <label class="block">
+            <input
+              type="password" id="secondPassword"
+              :class="{ valid: !$v.confirmPassword.$invalid, invalid: $v.confirmPassword.$invalid }"
+              v-model="$v.confirmPassword.$model" minlength="4" maxlength="50" required
+              v-bind:placeholder="$t('global.form[\'confirmpassword.placeholder\']')" data-cy="secondPassword"
+              class="form-input mt-1 block p-4 w-full border rounded border-gray-400 focus-within:border-blue-100">
+          </label>
+          <div v-if="$v.confirmPassword.$dirty && $v.confirmPassword.$invalid">
+            <small
+              class="form-text-error"
+              v-if="!$v.confirmPassword.required"
+              v-text="$t('global.messages.validate.confirmpassword.required')"
+            >
+              Your confirmation password is required.
+            </small>
+            <small
+              class="form-text-error"
+              v-if="!$v.confirmPassword.minLength"
+              v-text="$t('global.messages.validate.confirmpassword.minlength')"
+            >
+              Your confirmation password is required to be at least 4 characters.
+            </small>
+            <small
+              class="form-text-error"
+              v-if="!$v.confirmPassword.maxLength"
+              v-text="$t('global.messages.validate.confirmpassword.maxlength')"
+            >
+              Your confirmation password cannot be longer than 50 characters.
+            </small>
+            <small class="form-text-error" v-if="!$v.confirmPassword.sameAsPassword"
+                   v-text="$t('global.messages.error.dontmatch')">
+              The password and its confirmation do not match!
+            </small>
+          </div>
+        </div>
+        <p>CUSTOMER COMPONENT HERE</p>
       <button class="text-white bg-blue-500 w-full rounded-full text-2xl text-extrabold p-4 mb-8" type="submit"
               :disabled="$v.$invalid" v-text="$t('register.form.button')" data-cy="submit">
         Register

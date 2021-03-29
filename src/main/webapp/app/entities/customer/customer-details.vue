@@ -25,6 +25,18 @@
             <span v-if="customer.updatedAt">{{ $d(Date.parse(customer.updatedAt), 'long') }}</span>
           </dd>
           <dt>
+            <span v-text="$t('todusApp.customer.name')">Name</span>
+          </dt>
+          <dd>
+            <span>{{ customer.name }}</span>
+          </dd>
+          <dt>
+            <span v-text="$t('todusApp.customer.phone')">Phone</span>
+          </dt>
+          <dd>
+            <span>{{ customer.phone }}</span>
+          </dd>
+          <dt>
             <span v-text="$t('todusApp.customer.user')">User</span>
           </dt>
           <dd>

@@ -9,6 +9,8 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -48,7 +50,7 @@ public class CustomerResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/customers")
-    public ResponseEntity<CustomerDTO> createCustomer(@RequestBody CustomerDTO customerDTO) throws URISyntaxException {
+    public ResponseEntity<CustomerDTO> createCustomer(@Valid @RequestBody CustomerDTO customerDTO) throws URISyntaxException {
         log.debug("REST request to save Customer : {}", customerDTO);
         if (customerDTO.getId() != null) {
             throw new BadRequestAlertException("A new customer cannot already have an ID", ENTITY_NAME, "idexists");
@@ -73,7 +75,7 @@ public class CustomerResource {
     @PutMapping("/customers/{id}")
     public ResponseEntity<CustomerDTO> updateCustomer(
         @PathVariable(value = "id", required = false) final String id,
-        @RequestBody CustomerDTO customerDTO
+        @Valid @RequestBody CustomerDTO customerDTO
     ) throws URISyntaxException {
         log.debug("REST request to update Customer : {}, {}", id, customerDTO);
         if (customerDTO.getId() == null) {
@@ -108,7 +110,7 @@ public class CustomerResource {
     @PatchMapping(value = "/customers/{id}", consumes = "application/merge-patch+json")
     public ResponseEntity<CustomerDTO> partialUpdateCustomer(
         @PathVariable(value = "id", required = false) final String id,
-        @RequestBody CustomerDTO customerDTO
+        @NotNull @RequestBody CustomerDTO customerDTO
     ) throws URISyntaxException {
         log.debug("REST request to partial update Customer partially : {}, {}", id, customerDTO);
         if (customerDTO.getId() == null) {

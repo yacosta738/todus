@@ -48,6 +48,12 @@ class CustomerResourceIT {
     private static final Instant DEFAULT_UPDATED_AT = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_UPDATED_AT = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
+    private static final String DEFAULT_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_NAME = "BBBBBBBBBB";
+
+    private static final String DEFAULT_PHONE = "AAAAAAAAAA";
+    private static final String UPDATED_PHONE = "BBBBBBBBBB";
+
     private static final String ENTITY_API_URL = "/api/customers";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
@@ -75,7 +81,12 @@ class CustomerResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Customer createEntity() {
-        Customer customer = new Customer().slug(DEFAULT_SLUG).createdAt(DEFAULT_CREATED_AT).updatedAt(DEFAULT_UPDATED_AT);
+        Customer customer = new Customer()
+            .slug(DEFAULT_SLUG)
+            .createdAt(DEFAULT_CREATED_AT)
+            .updatedAt(DEFAULT_UPDATED_AT)
+            .name(DEFAULT_NAME)
+            .phone(DEFAULT_PHONE);
         return customer;
     }
 
@@ -86,7 +97,12 @@ class CustomerResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Customer createUpdatedEntity() {
-        Customer customer = new Customer().slug(UPDATED_SLUG).createdAt(UPDATED_CREATED_AT).updatedAt(UPDATED_UPDATED_AT);
+        Customer customer = new Customer()
+            .slug(UPDATED_SLUG)
+            .createdAt(UPDATED_CREATED_AT)
+            .updatedAt(UPDATED_UPDATED_AT)
+            .name(UPDATED_NAME)
+            .phone(UPDATED_PHONE);
         return customer;
     }
 
@@ -112,6 +128,8 @@ class CustomerResourceIT {
         assertThat(testCustomer.getSlug()).isEqualTo(DEFAULT_SLUG);
         assertThat(testCustomer.getCreatedAt()).isEqualTo(DEFAULT_CREATED_AT);
         assertThat(testCustomer.getUpdatedAt()).isEqualTo(DEFAULT_UPDATED_AT);
+        assertThat(testCustomer.getName()).isEqualTo(DEFAULT_NAME);
+        assertThat(testCustomer.getPhone()).isEqualTo(DEFAULT_PHONE);
     }
 
     @Test
@@ -133,6 +151,23 @@ class CustomerResourceIT {
     }
 
     @Test
+    void checkNameIsRequired() throws Exception {
+        int databaseSizeBeforeTest = customerRepository.findAll().size();
+        // set the field null
+        customer.setName(null);
+
+        // Create the Customer, which fails.
+        CustomerDTO customerDTO = customerMapper.toDto(customer);
+
+        restCustomerMockMvc
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(customerDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<Customer> customerList = customerRepository.findAll();
+        assertThat(customerList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
     void getAllCustomers() throws Exception {
         // Initialize the database
         customerRepository.save(customer);
@@ -144,7 +179,9 @@ class CustomerResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].slug").value(hasItem(DEFAULT_SLUG)))
             .andExpect(jsonPath("$.[*].createdAt").value(hasItem(DEFAULT_CREATED_AT.toString())))
-            .andExpect(jsonPath("$.[*].updatedAt").value(hasItem(DEFAULT_UPDATED_AT.toString())));
+            .andExpect(jsonPath("$.[*].updatedAt").value(hasItem(DEFAULT_UPDATED_AT.toString())))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
+            .andExpect(jsonPath("$.[*].phone").value(hasItem(DEFAULT_PHONE)));
     }
 
     @Test
@@ -159,7 +196,9 @@ class CustomerResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.slug").value(DEFAULT_SLUG))
             .andExpect(jsonPath("$.createdAt").value(DEFAULT_CREATED_AT.toString()))
-            .andExpect(jsonPath("$.updatedAt").value(DEFAULT_UPDATED_AT.toString()));
+            .andExpect(jsonPath("$.updatedAt").value(DEFAULT_UPDATED_AT.toString()))
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
+            .andExpect(jsonPath("$.phone").value(DEFAULT_PHONE));
     }
 
     @Test
@@ -177,7 +216,12 @@ class CustomerResourceIT {
 
         // Update the customer
         Customer updatedCustomer = customerRepository.findById(customer.getId()).get();
-        updatedCustomer.slug(UPDATED_SLUG).createdAt(UPDATED_CREATED_AT).updatedAt(UPDATED_UPDATED_AT);
+        updatedCustomer
+            .slug(UPDATED_SLUG)
+            .createdAt(UPDATED_CREATED_AT)
+            .updatedAt(UPDATED_UPDATED_AT)
+            .name(UPDATED_NAME)
+            .phone(UPDATED_PHONE);
         CustomerDTO customerDTO = customerMapper.toDto(updatedCustomer);
 
         restCustomerMockMvc
@@ -195,6 +239,8 @@ class CustomerResourceIT {
         assertThat(testCustomer.getSlug()).isEqualTo(UPDATED_SLUG);
         assertThat(testCustomer.getCreatedAt()).isEqualTo(UPDATED_CREATED_AT);
         assertThat(testCustomer.getUpdatedAt()).isEqualTo(UPDATED_UPDATED_AT);
+        assertThat(testCustomer.getName()).isEqualTo(UPDATED_NAME);
+        assertThat(testCustomer.getPhone()).isEqualTo(UPDATED_PHONE);
     }
 
     @Test
@@ -270,7 +316,7 @@ class CustomerResourceIT {
         Customer partialUpdatedCustomer = new Customer();
         partialUpdatedCustomer.setId(customer.getId());
 
-        partialUpdatedCustomer.createdAt(UPDATED_CREATED_AT).updatedAt(UPDATED_UPDATED_AT);
+        partialUpdatedCustomer.createdAt(UPDATED_CREATED_AT).updatedAt(UPDATED_UPDATED_AT).name(UPDATED_NAME);
 
         restCustomerMockMvc
             .perform(
@@ -287,6 +333,8 @@ class CustomerResourceIT {
         assertThat(testCustomer.getSlug()).isEqualTo(DEFAULT_SLUG);
         assertThat(testCustomer.getCreatedAt()).isEqualTo(UPDATED_CREATED_AT);
         assertThat(testCustomer.getUpdatedAt()).isEqualTo(UPDATED_UPDATED_AT);
+        assertThat(testCustomer.getName()).isEqualTo(UPDATED_NAME);
+        assertThat(testCustomer.getPhone()).isEqualTo(DEFAULT_PHONE);
     }
 
     @Test
@@ -300,7 +348,12 @@ class CustomerResourceIT {
         Customer partialUpdatedCustomer = new Customer();
         partialUpdatedCustomer.setId(customer.getId());
 
-        partialUpdatedCustomer.slug(UPDATED_SLUG).createdAt(UPDATED_CREATED_AT).updatedAt(UPDATED_UPDATED_AT);
+        partialUpdatedCustomer
+            .slug(UPDATED_SLUG)
+            .createdAt(UPDATED_CREATED_AT)
+            .updatedAt(UPDATED_UPDATED_AT)
+            .name(UPDATED_NAME)
+            .phone(UPDATED_PHONE);
 
         restCustomerMockMvc
             .perform(
@@ -317,6 +370,8 @@ class CustomerResourceIT {
         assertThat(testCustomer.getSlug()).isEqualTo(UPDATED_SLUG);
         assertThat(testCustomer.getCreatedAt()).isEqualTo(UPDATED_CREATED_AT);
         assertThat(testCustomer.getUpdatedAt()).isEqualTo(UPDATED_UPDATED_AT);
+        assertThat(testCustomer.getName()).isEqualTo(UPDATED_NAME);
+        assertThat(testCustomer.getPhone()).isEqualTo(UPDATED_PHONE);
     }
 
     @Test

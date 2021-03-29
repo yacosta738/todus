@@ -5,6 +5,7 @@ import java.time.Instant;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import javax.validation.constraints.*;
 
 /**
  * A DTO for the {@link com.todus.domain.Customer} entity.
@@ -18,6 +19,12 @@ public class CustomerDTO implements Serializable {
     private Instant createdAt;
 
     private Instant updatedAt;
+
+    @NotNull
+    @Size(max = 60)
+    private String name;
+
+    private String phone;
 
     private UserDTO user;
 
@@ -53,6 +60,22 @@ public class CustomerDTO implements Serializable {
 
     public void setUpdatedAt(Instant updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public UserDTO getUser() {
@@ -100,6 +123,8 @@ public class CustomerDTO implements Serializable {
             ", slug='" + getSlug() + "'" +
             ", createdAt='" + getCreatedAt() + "'" +
             ", updatedAt='" + getUpdatedAt() + "'" +
+            ", name='" + getName() + "'" +
+            ", phone='" + getPhone() + "'" +
             ", user='" + getUser() + "'" +
             ", followers='" + getFollowers() + "'" +
             "}";

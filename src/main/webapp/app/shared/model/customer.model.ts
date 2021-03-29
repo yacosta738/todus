@@ -6,6 +6,8 @@ export interface ICustomer {
   slug?: string | null;
   createdAt?: Date | null;
   updatedAt?: Date | null;
+  name?: string;
+  phone?: string | null;
   tweets?: ITweets[] | null;
   user?: IUser | null;
   followers?: ICustomer[] | null;
@@ -18,6 +20,8 @@ export class Customer implements ICustomer {
     public slug?: string | null,
     public createdAt?: Date | null,
     public updatedAt?: Date | null,
+    public name?: string,
+    public phone?: string | null,
     public tweets?: ITweets[] | null,
     public user?: IUser | null,
     public followers?: ICustomer[] | null,

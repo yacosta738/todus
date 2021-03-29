@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
+import javax.validation.constraints.*;
 import org.springframework.data.neo4j.core.schema.GeneratedValue;
 import org.springframework.data.neo4j.core.schema.Id;
 import org.springframework.data.neo4j.core.schema.Node;
@@ -32,6 +33,14 @@ public class Customer implements Serializable {
 
     @Property("updated_at")
     private Instant updatedAt;
+
+    @NotNull
+    @Size(max = 60)
+    @Property("name")
+    private String name;
+
+    @Property("phone")
+    private String phone;
 
     @Relationship("HAS_TWEETS")
     @JsonIgnoreProperties(value = { "customer" }, allowSetters = true)
@@ -99,6 +108,32 @@ public class Customer implements Serializable {
 
     public void setUpdatedAt(Instant updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public Customer name(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPhone() {
+        return this.phone;
+    }
+
+    public Customer phone(String phone) {
+        this.phone = phone;
+        return this;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public Set<Tweets> getTweets() {
@@ -226,6 +261,8 @@ public class Customer implements Serializable {
             ", slug='" + getSlug() + "'" +
             ", createdAt='" + getCreatedAt() + "'" +
             ", updatedAt='" + getUpdatedAt() + "'" +
+            ", name='" + getName() + "'" +
+            ", phone='" + getPhone() + "'" +
             "}";
     }
 }

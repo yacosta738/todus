@@ -33,7 +33,7 @@ describe('Service Tests', () => {
     beforeEach(() => {
       service = new CustomerService();
       currentDate = new Date();
-      elemDefault = new Customer('ID', 'AAAAAAA', currentDate, currentDate);
+      elemDefault = new Customer('ID', 'AAAAAAA', currentDate, currentDate, 'AAAAAAA', 'AAAAAAA');
     });
 
     describe('Service methods', () => {
@@ -102,6 +102,8 @@ describe('Service Tests', () => {
             slug: 'BBBBBB',
             createdAt: dayjs(currentDate).format(DATE_TIME_FORMAT),
             updatedAt: dayjs(currentDate).format(DATE_TIME_FORMAT),
+            name: 'BBBBBB',
+            phone: 'BBBBBB',
           },
           elemDefault
         );
@@ -136,6 +138,7 @@ describe('Service Tests', () => {
           {
             createdAt: dayjs(currentDate).format(DATE_TIME_FORMAT),
             updatedAt: dayjs(currentDate).format(DATE_TIME_FORMAT),
+            name: 'BBBBBB',
           },
           new Customer()
         );
@@ -172,6 +175,8 @@ describe('Service Tests', () => {
             slug: 'BBBBBB',
             createdAt: dayjs(currentDate).format(DATE_TIME_FORMAT),
             updatedAt: dayjs(currentDate).format(DATE_TIME_FORMAT),
+            name: 'BBBBBB',
+            phone: 'BBBBBB',
           },
           elemDefault
         );
