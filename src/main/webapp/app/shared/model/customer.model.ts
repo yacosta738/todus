@@ -1,30 +1,28 @@
-import { ITweets } from '@/shared/model/tweets.model';
 import { IUser } from '@/shared/model/user.model';
+import { ITweets } from '@/shared/model/tweets.model';
 
 export interface ICustomer {
   id?: string;
-  slug?: string | null;
-  createdAt?: Date | null;
-  updatedAt?: Date | null;
   name?: string;
   phone?: string | null;
-  tweets?: ITweets[] | null;
+  createdAt?: Date | null;
+  updatedAt?: Date | null;
   user?: IUser | null;
+  tweets?: ITweets[] | null;
   followers?: ICustomer[] | null;
-  followeds?: ICustomer[] | null;
+  followings?: ICustomer[] | null;
 }
 
 export class Customer implements ICustomer {
   constructor(
     public id?: string,
-    public slug?: string | null,
-    public createdAt?: Date | null,
-    public updatedAt?: Date | null,
     public name?: string,
     public phone?: string | null,
-    public tweets?: ITweets[] | null,
+    public createdAt?: Date | null,
+    public updatedAt?: Date | null,
     public user?: IUser | null,
+    public tweets?: ITweets[] | null,
     public followers?: ICustomer[] | null,
-    public followeds?: ICustomer[] | null
+    public followings?: ICustomer[] | null
   ) {}
 }

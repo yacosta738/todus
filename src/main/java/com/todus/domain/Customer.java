@@ -25,8 +25,14 @@ public class Customer implements Serializable {
     @GeneratedValue(UUIDStringGenerator.class)
     private String id;
 
-    @Property("slug")
-    private String slug;
+    @NotNull
+    @Size(max = 60)
+    @Property("name")
+    private String name;
+
+    @Pattern(regexp = "^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\\s\\./0-9]*$")
+    @Property("phone")
+    private String phone;
 
     @Property("created_at")
     private Instant createdAt;
@@ -34,28 +40,20 @@ public class Customer implements Serializable {
     @Property("updated_at")
     private Instant updatedAt;
 
-    @NotNull
-    @Size(max = 60)
-    @Property("name")
-    private String name;
-
-    @Property("phone")
-    private String phone;
+    @Relationship("HAS_USER")
+    private User user;
 
     @Relationship("HAS_TWEETS")
     @JsonIgnoreProperties(value = { "customer" }, allowSetters = true)
     private Set<Tweets> tweets = new HashSet<>();
 
-    @Relationship("HAS_USER")
-    private User user;
-
     @Relationship("HAS_FOLLOWER")
-    @JsonIgnoreProperties(value = { "tweets", "user", "followers", "followeds" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "user", "tweets", "followers", "followings" }, allowSetters = true)
     private Set<Customer> followers = new HashSet<>();
 
     @Relationship(value = "HAS_FOLLOWER", direction = Relationship.Direction.INCOMING)
-    @JsonIgnoreProperties(value = { "tweets", "user", "followers", "followeds" }, allowSetters = true)
-    private Set<Customer> followeds = new HashSet<>();
+    @JsonIgnoreProperties(value = { "user", "tweets", "followers", "followings" }, allowSetters = true)
+    private Set<Customer> followings = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public String getId() {
@@ -71,17 +69,30 @@ public class Customer implements Serializable {
         return this;
     }
 
-    public String getSlug() {
-        return this.slug;
+    public String getName() {
+        return this.name;
     }
 
-    public Customer slug(String slug) {
-        this.slug = slug;
+    public Customer name(String name) {
+        this.name = name;
         return this;
     }
 
-    public void setSlug(String slug) {
-        this.slug = slug;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPhone() {
+        return this.phone;
+    }
+
+    public Customer phone(String phone) {
+        this.phone = phone;
+        return this;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public Instant getCreatedAt() {
@@ -110,30 +121,17 @@ public class Customer implements Serializable {
         this.updatedAt = updatedAt;
     }
 
-    public String getName() {
-        return this.name;
+    public User getUser() {
+        return this.user;
     }
 
-    public Customer name(String name) {
-        this.name = name;
+    public Customer user(User user) {
+        this.setUser(user);
         return this;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getPhone() {
-        return this.phone;
-    }
-
-    public Customer phone(String phone) {
-        this.phone = phone;
-        return this;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Set<Tweets> getTweets() {
@@ -165,19 +163,6 @@ public class Customer implements Serializable {
         this.tweets = tweets;
     }
 
-    public User getUser() {
-        return this.user;
-    }
-
-    public Customer user(User user) {
-        this.setUser(user);
-        return this;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
     public Set<Customer> getFollowers() {
         return this.followers;
     }
@@ -189,13 +174,13 @@ public class Customer implements Serializable {
 
     public Customer addFollower(Customer customer) {
         this.followers.add(customer);
-        customer.getFolloweds().add(this);
+        customer.getFollowings().add(this);
         return this;
     }
 
     public Customer removeFollower(Customer customer) {
         this.followers.remove(customer);
-        customer.getFolloweds().remove(this);
+        customer.getFollowings().remove(this);
         return this;
     }
 
@@ -203,35 +188,35 @@ public class Customer implements Serializable {
         this.followers = customers;
     }
 
-    public Set<Customer> getFolloweds() {
-        return this.followeds;
+    public Set<Customer> getFollowings() {
+        return this.followings;
     }
 
-    public Customer followeds(Set<Customer> customers) {
-        this.setFolloweds(customers);
+    public Customer followings(Set<Customer> customers) {
+        this.setFollowings(customers);
         return this;
     }
 
-    public Customer addFollowed(Customer customer) {
-        this.followeds.add(customer);
+    public Customer addFollowing(Customer customer) {
+        this.followings.add(customer);
         customer.getFollowers().add(this);
         return this;
     }
 
-    public Customer removeFollowed(Customer customer) {
-        this.followeds.remove(customer);
+    public Customer removeFollowing(Customer customer) {
+        this.followings.remove(customer);
         customer.getFollowers().remove(this);
         return this;
     }
 
-    public void setFolloweds(Set<Customer> customers) {
-        if (this.followeds != null) {
-            this.followeds.forEach(i -> i.removeFollower(this));
+    public void setFollowings(Set<Customer> customers) {
+        if (this.followings != null) {
+            this.followings.forEach(i -> i.removeFollower(this));
         }
         if (customers != null) {
             customers.forEach(i -> i.addFollower(this));
         }
-        this.followeds = customers;
+        this.followings = customers;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
@@ -258,11 +243,10 @@ public class Customer implements Serializable {
     public String toString() {
         return "Customer{" +
             "id=" + getId() +
-            ", slug='" + getSlug() + "'" +
-            ", createdAt='" + getCreatedAt() + "'" +
-            ", updatedAt='" + getUpdatedAt() + "'" +
             ", name='" + getName() + "'" +
             ", phone='" + getPhone() + "'" +
+            ", createdAt='" + getCreatedAt() + "'" +
+            ", updatedAt='" + getUpdatedAt() + "'" +
             "}";
     }
 }

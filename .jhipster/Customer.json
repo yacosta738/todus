@@ -2,8 +2,16 @@
   "name": "Customer",
   "fields": [
     {
-      "fieldName": "slug",
-      "fieldType": "String"
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "60"
+    },
+    {
+      "fieldName": "phone",
+      "fieldType": "String",
+      "fieldValidateRules": ["pattern"],
+      "fieldValidateRulesPattern": "^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\\s\\./0-9]*$"
     },
     {
       "fieldName": "createdAt",
@@ -12,19 +20,17 @@
     {
       "fieldName": "updatedAt",
       "fieldType": "Instant"
-    },
-    {
-      "fieldName": "name",
-      "fieldType": "String",
-      "fieldValidateRules": ["required", "maxlength"],
-      "fieldValidateRulesMaxlength": "60"
-    },
-    {
-      "fieldName": "phone",
-      "fieldType": "String"
     }
   ],
   "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "customer",
+      "relationshipName": "user",
+      "otherEntityField": "login",
+      "ownerSide": true
+    },
     {
       "relationshipType": "one-to-many",
       "otherEntityName": "tweets",
@@ -32,16 +38,9 @@
       "relationshipName": "tweets"
     },
     {
-      "relationshipType": "many-to-one",
-      "otherEntityName": "user",
-      "otherEntityRelationshipName": "customer",
-      "relationshipName": "user",
-      "otherEntityField": "login"
-    },
-    {
       "relationshipType": "many-to-many",
       "otherEntityName": "customer",
-      "otherEntityRelationshipName": "followed",
+      "otherEntityRelationshipName": "following",
       "relationshipName": "follower",
       "ownerSide": true
     },
@@ -49,7 +48,7 @@
       "relationshipType": "many-to-many",
       "otherEntityName": "customer",
       "otherEntityRelationshipName": "follower",
-      "relationshipName": "followed",
+      "relationshipName": "following",
       "ownerSide": false
     }
   ],
@@ -62,5 +61,5 @@
   "readOnly": false,
   "embedded": false,
   "applications": "*",
-  "changelogDate": "20210325013135"
+  "changelogDate": "20210331141240"
 }

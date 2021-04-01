@@ -39,20 +39,17 @@ import org.springframework.test.web.servlet.MockMvc;
 @WithMockUser
 class CustomerResourceIT {
 
-    private static final String DEFAULT_SLUG = "AAAAAAAAAA";
-    private static final String UPDATED_SLUG = "BBBBBBBBBB";
+    private static final String DEFAULT_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_NAME = "BBBBBBBBBB";
+
+    private static final String DEFAULT_PHONE = "+(587";
+    private static final String UPDATED_PHONE = "+(29";
 
     private static final Instant DEFAULT_CREATED_AT = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_CREATED_AT = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
     private static final Instant DEFAULT_UPDATED_AT = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_UPDATED_AT = Instant.now().truncatedTo(ChronoUnit.MILLIS);
-
-    private static final String DEFAULT_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_NAME = "BBBBBBBBBB";
-
-    private static final String DEFAULT_PHONE = "AAAAAAAAAA";
-    private static final String UPDATED_PHONE = "BBBBBBBBBB";
 
     private static final String ENTITY_API_URL = "/api/customers";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -82,11 +79,10 @@ class CustomerResourceIT {
      */
     public static Customer createEntity() {
         Customer customer = new Customer()
-            .slug(DEFAULT_SLUG)
-            .createdAt(DEFAULT_CREATED_AT)
-            .updatedAt(DEFAULT_UPDATED_AT)
             .name(DEFAULT_NAME)
-            .phone(DEFAULT_PHONE);
+            .phone(DEFAULT_PHONE)
+            .createdAt(DEFAULT_CREATED_AT)
+            .updatedAt(DEFAULT_UPDATED_AT);
         return customer;
     }
 
@@ -98,11 +94,10 @@ class CustomerResourceIT {
      */
     public static Customer createUpdatedEntity() {
         Customer customer = new Customer()
-            .slug(UPDATED_SLUG)
-            .createdAt(UPDATED_CREATED_AT)
-            .updatedAt(UPDATED_UPDATED_AT)
             .name(UPDATED_NAME)
-            .phone(UPDATED_PHONE);
+            .phone(UPDATED_PHONE)
+            .createdAt(UPDATED_CREATED_AT)
+            .updatedAt(UPDATED_UPDATED_AT);
         return customer;
     }
 
@@ -125,11 +120,10 @@ class CustomerResourceIT {
         List<Customer> customerList = customerRepository.findAll();
         assertThat(customerList).hasSize(databaseSizeBeforeCreate + 1);
         Customer testCustomer = customerList.get(customerList.size() - 1);
-        assertThat(testCustomer.getSlug()).isEqualTo(DEFAULT_SLUG);
-        assertThat(testCustomer.getCreatedAt()).isEqualTo(DEFAULT_CREATED_AT);
-        assertThat(testCustomer.getUpdatedAt()).isEqualTo(DEFAULT_UPDATED_AT);
         assertThat(testCustomer.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testCustomer.getPhone()).isEqualTo(DEFAULT_PHONE);
+        assertThat(testCustomer.getCreatedAt()).isEqualTo(DEFAULT_CREATED_AT);
+        assertThat(testCustomer.getUpdatedAt()).isEqualTo(DEFAULT_UPDATED_AT);
     }
 
     @Test
@@ -177,11 +171,10 @@ class CustomerResourceIT {
             .perform(get(ENTITY_API_URL + "?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].slug").value(hasItem(DEFAULT_SLUG)))
-            .andExpect(jsonPath("$.[*].createdAt").value(hasItem(DEFAULT_CREATED_AT.toString())))
-            .andExpect(jsonPath("$.[*].updatedAt").value(hasItem(DEFAULT_UPDATED_AT.toString())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
-            .andExpect(jsonPath("$.[*].phone").value(hasItem(DEFAULT_PHONE)));
+            .andExpect(jsonPath("$.[*].phone").value(hasItem(DEFAULT_PHONE)))
+            .andExpect(jsonPath("$.[*].createdAt").value(hasItem(DEFAULT_CREATED_AT.toString())))
+            .andExpect(jsonPath("$.[*].updatedAt").value(hasItem(DEFAULT_UPDATED_AT.toString())));
     }
 
     @Test
@@ -194,11 +187,10 @@ class CustomerResourceIT {
             .perform(get(ENTITY_API_URL_ID, customer.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.slug").value(DEFAULT_SLUG))
-            .andExpect(jsonPath("$.createdAt").value(DEFAULT_CREATED_AT.toString()))
-            .andExpect(jsonPath("$.updatedAt").value(DEFAULT_UPDATED_AT.toString()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
-            .andExpect(jsonPath("$.phone").value(DEFAULT_PHONE));
+            .andExpect(jsonPath("$.phone").value(DEFAULT_PHONE))
+            .andExpect(jsonPath("$.createdAt").value(DEFAULT_CREATED_AT.toString()))
+            .andExpect(jsonPath("$.updatedAt").value(DEFAULT_UPDATED_AT.toString()));
     }
 
     @Test
@@ -216,12 +208,7 @@ class CustomerResourceIT {
 
         // Update the customer
         Customer updatedCustomer = customerRepository.findById(customer.getId()).get();
-        updatedCustomer
-            .slug(UPDATED_SLUG)
-            .createdAt(UPDATED_CREATED_AT)
-            .updatedAt(UPDATED_UPDATED_AT)
-            .name(UPDATED_NAME)
-            .phone(UPDATED_PHONE);
+        updatedCustomer.name(UPDATED_NAME).phone(UPDATED_PHONE).createdAt(UPDATED_CREATED_AT).updatedAt(UPDATED_UPDATED_AT);
         CustomerDTO customerDTO = customerMapper.toDto(updatedCustomer);
 
         restCustomerMockMvc
@@ -236,11 +223,10 @@ class CustomerResourceIT {
         List<Customer> customerList = customerRepository.findAll();
         assertThat(customerList).hasSize(databaseSizeBeforeUpdate);
         Customer testCustomer = customerList.get(customerList.size() - 1);
-        assertThat(testCustomer.getSlug()).isEqualTo(UPDATED_SLUG);
-        assertThat(testCustomer.getCreatedAt()).isEqualTo(UPDATED_CREATED_AT);
-        assertThat(testCustomer.getUpdatedAt()).isEqualTo(UPDATED_UPDATED_AT);
         assertThat(testCustomer.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testCustomer.getPhone()).isEqualTo(UPDATED_PHONE);
+        assertThat(testCustomer.getCreatedAt()).isEqualTo(UPDATED_CREATED_AT);
+        assertThat(testCustomer.getUpdatedAt()).isEqualTo(UPDATED_UPDATED_AT);
     }
 
     @Test
@@ -316,7 +302,7 @@ class CustomerResourceIT {
         Customer partialUpdatedCustomer = new Customer();
         partialUpdatedCustomer.setId(customer.getId());
 
-        partialUpdatedCustomer.createdAt(UPDATED_CREATED_AT).updatedAt(UPDATED_UPDATED_AT).name(UPDATED_NAME);
+        partialUpdatedCustomer.phone(UPDATED_PHONE);
 
         restCustomerMockMvc
             .perform(
@@ -330,11 +316,10 @@ class CustomerResourceIT {
         List<Customer> customerList = customerRepository.findAll();
         assertThat(customerList).hasSize(databaseSizeBeforeUpdate);
         Customer testCustomer = customerList.get(customerList.size() - 1);
-        assertThat(testCustomer.getSlug()).isEqualTo(DEFAULT_SLUG);
-        assertThat(testCustomer.getCreatedAt()).isEqualTo(UPDATED_CREATED_AT);
-        assertThat(testCustomer.getUpdatedAt()).isEqualTo(UPDATED_UPDATED_AT);
-        assertThat(testCustomer.getName()).isEqualTo(UPDATED_NAME);
-        assertThat(testCustomer.getPhone()).isEqualTo(DEFAULT_PHONE);
+        assertThat(testCustomer.getName()).isEqualTo(DEFAULT_NAME);
+        assertThat(testCustomer.getPhone()).isEqualTo(UPDATED_PHONE);
+        assertThat(testCustomer.getCreatedAt()).isEqualTo(DEFAULT_CREATED_AT);
+        assertThat(testCustomer.getUpdatedAt()).isEqualTo(DEFAULT_UPDATED_AT);
     }
 
     @Test
@@ -348,12 +333,7 @@ class CustomerResourceIT {
         Customer partialUpdatedCustomer = new Customer();
         partialUpdatedCustomer.setId(customer.getId());
 
-        partialUpdatedCustomer
-            .slug(UPDATED_SLUG)
-            .createdAt(UPDATED_CREATED_AT)
-            .updatedAt(UPDATED_UPDATED_AT)
-            .name(UPDATED_NAME)
-            .phone(UPDATED_PHONE);
+        partialUpdatedCustomer.name(UPDATED_NAME).phone(UPDATED_PHONE).createdAt(UPDATED_CREATED_AT).updatedAt(UPDATED_UPDATED_AT);
 
         restCustomerMockMvc
             .perform(
@@ -367,11 +347,10 @@ class CustomerResourceIT {
         List<Customer> customerList = customerRepository.findAll();
         assertThat(customerList).hasSize(databaseSizeBeforeUpdate);
         Customer testCustomer = customerList.get(customerList.size() - 1);
-        assertThat(testCustomer.getSlug()).isEqualTo(UPDATED_SLUG);
-        assertThat(testCustomer.getCreatedAt()).isEqualTo(UPDATED_CREATED_AT);
-        assertThat(testCustomer.getUpdatedAt()).isEqualTo(UPDATED_UPDATED_AT);
         assertThat(testCustomer.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testCustomer.getPhone()).isEqualTo(UPDATED_PHONE);
+        assertThat(testCustomer.getCreatedAt()).isEqualTo(UPDATED_CREATED_AT);
+        assertThat(testCustomer.getUpdatedAt()).isEqualTo(UPDATED_UPDATED_AT);
     }
 
     @Test

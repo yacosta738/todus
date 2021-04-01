@@ -35,7 +35,7 @@ public class Tweets implements Serializable {
     private Instant updatedAt;
 
     @Relationship(value = "HAS_TWEETS", direction = Relationship.Direction.INCOMING)
-    @JsonIgnoreProperties(value = { "tweets", "user", "followers", "followeds" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "user", "tweets", "followers", "followings" }, allowSetters = true)
     private Customer customer;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

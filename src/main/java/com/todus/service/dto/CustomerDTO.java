@@ -14,17 +14,16 @@ public class CustomerDTO implements Serializable {
 
     private String id;
 
-    private String slug;
-
-    private Instant createdAt;
-
-    private Instant updatedAt;
-
     @NotNull
     @Size(max = 60)
     private String name;
 
+    @Pattern(regexp = "^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\\s\\./0-9]*$")
     private String phone;
+
+    private Instant createdAt;
+
+    private Instant updatedAt;
 
     private UserDTO user;
 
@@ -36,30 +35,6 @@ public class CustomerDTO implements Serializable {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getSlug() {
-        return slug;
-    }
-
-    public void setSlug(String slug) {
-        this.slug = slug;
-    }
-
-    public Instant getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Instant createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Instant getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Instant updatedAt) {
-        this.updatedAt = updatedAt;
     }
 
     public String getName() {
@@ -76,6 +51,22 @@ public class CustomerDTO implements Serializable {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public Instant getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Instant createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Instant getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Instant updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     public UserDTO getUser() {
@@ -120,11 +111,10 @@ public class CustomerDTO implements Serializable {
     public String toString() {
         return "CustomerDTO{" +
             "id='" + getId() + "'" +
-            ", slug='" + getSlug() + "'" +
-            ", createdAt='" + getCreatedAt() + "'" +
-            ", updatedAt='" + getUpdatedAt() + "'" +
             ", name='" + getName() + "'" +
             ", phone='" + getPhone() + "'" +
+            ", createdAt='" + getCreatedAt() + "'" +
+            ", updatedAt='" + getUpdatedAt() + "'" +
             ", user='" + getUser() + "'" +
             ", followers='" + getFollowers() + "'" +
             "}";

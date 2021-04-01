@@ -4,24 +4,23 @@ import { required, maxLength } from 'vuelidate/lib/validators';
 import dayjs from 'dayjs';
 import { DATE_TIME_LONG_FORMAT } from '@/shared/date/filters';
 
+import UserService from '@/admin/user-management/user-management.service';
+
 import TweetsService from '@/entities/tweets/tweets.service';
 import { ITweets } from '@/shared/model/tweets.model';
-
-import UserService from '@/admin/user-management/user-management.service';
 
 import { ICustomer, Customer } from '@/shared/model/customer.model';
 import CustomerService from './customer.service';
 
 const validations: any = {
   customer: {
-    slug: {},
-    createdAt: {},
-    updatedAt: {},
     name: {
       required,
       maxLength: maxLength(60),
     },
     phone: {},
+    createdAt: {},
+    updatedAt: {},
   },
 };
 
@@ -32,13 +31,13 @@ export default class CustomerUpdate extends Vue {
   @Inject('customerService') private customerService: () => CustomerService;
   public customer: ICustomer = new Customer();
 
-  @Inject('tweetsService') private tweetsService: () => TweetsService;
-
-  public tweets: ITweets[] = [];
-
   @Inject('userService') private userService: () => UserService;
 
   public users: Array<any> = [];
+
+  @Inject('tweetsService') private tweetsService: () => TweetsService;
+
+  public tweets: ITweets[] = [];
 
   public customers: ICustomer[] = [];
   public isSaving = false;
@@ -137,15 +136,15 @@ export default class CustomerUpdate extends Vue {
   }
 
   public initRelationships(): void {
-    this.tweetsService()
-      .retrieve()
-      .then(res => {
-        this.tweets = res.data;
-      });
     this.userService()
       .retrieve()
       .then(res => {
         this.users = res.data;
+      });
+    this.tweetsService()
+      .retrieve()
+      .then(res => {
+        this.tweets = res.data;
       });
     this.customerService()
       .retrieve()

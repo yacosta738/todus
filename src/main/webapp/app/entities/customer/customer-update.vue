@@ -15,48 +15,6 @@
             <input type="text" class="form-control" id="id" name="id" v-model="customer.id" readonly />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="$t('todusApp.customer.slug')" for="customer-slug">Slug</label>
-            <input
-              type="text"
-              class="form-control"
-              name="slug"
-              id="customer-slug"
-              data-cy="slug"
-              :class="{ valid: !$v.customer.slug.$invalid, invalid: $v.customer.slug.$invalid }"
-              v-model="$v.customer.slug.$model"
-            />
-          </div>
-          <div class="form-group">
-            <label class="form-control-label" v-text="$t('todusApp.customer.createdAt')" for="customer-createdAt">Created At</label>
-            <div class="d-flex">
-              <input
-                id="customer-createdAt"
-                data-cy="createdAt"
-                type="datetime-local"
-                class="form-control"
-                name="createdAt"
-                :class="{ valid: !$v.customer.createdAt.$invalid, invalid: $v.customer.createdAt.$invalid }"
-                :value="convertDateTimeFromServer($v.customer.createdAt.$model)"
-                @change="updateInstantField('createdAt', $event)"
-              />
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="form-control-label" v-text="$t('todusApp.customer.updatedAt')" for="customer-updatedAt">Updated At</label>
-            <div class="d-flex">
-              <input
-                id="customer-updatedAt"
-                data-cy="updatedAt"
-                type="datetime-local"
-                class="form-control"
-                name="updatedAt"
-                :class="{ valid: !$v.customer.updatedAt.$invalid, invalid: $v.customer.updatedAt.$invalid }"
-                :value="convertDateTimeFromServer($v.customer.updatedAt.$model)"
-                @change="updateInstantField('updatedAt', $event)"
-              />
-            </div>
-          </div>
-          <div class="form-group">
             <label class="form-control-label" v-text="$t('todusApp.customer.name')" for="customer-name">Name</label>
             <input
               type="text"
@@ -92,6 +50,45 @@
               :class="{ valid: !$v.customer.phone.$invalid, invalid: $v.customer.phone.$invalid }"
               v-model="$v.customer.phone.$model"
             />
+            <div v-if="$v.customer.phone.$anyDirty && $v.customer.phone.$invalid">
+              <small
+                class="form-text text-danger"
+                v-if="!$v.customer.phone.pattern"
+                v-text="$t('entity.validation.pattern', { pattern: 'Phone' })"
+              >
+                This field should follow pattern for "Phone".
+              </small>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-control-label" v-text="$t('todusApp.customer.createdAt')" for="customer-createdAt">Created At</label>
+            <div class="d-flex">
+              <input
+                id="customer-createdAt"
+                data-cy="createdAt"
+                type="datetime-local"
+                class="form-control"
+                name="createdAt"
+                :class="{ valid: !$v.customer.createdAt.$invalid, invalid: $v.customer.createdAt.$invalid }"
+                :value="convertDateTimeFromServer($v.customer.createdAt.$model)"
+                @change="updateInstantField('createdAt', $event)"
+              />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-control-label" v-text="$t('todusApp.customer.updatedAt')" for="customer-updatedAt">Updated At</label>
+            <div class="d-flex">
+              <input
+                id="customer-updatedAt"
+                data-cy="updatedAt"
+                type="datetime-local"
+                class="form-control"
+                name="updatedAt"
+                :class="{ valid: !$v.customer.updatedAt.$invalid, invalid: $v.customer.updatedAt.$invalid }"
+                :value="convertDateTimeFromServer($v.customer.updatedAt.$model)"
+                @change="updateInstantField('updatedAt', $event)"
+              />
+            </div>
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="$t('todusApp.customer.user')" for="customer-user">User</label>

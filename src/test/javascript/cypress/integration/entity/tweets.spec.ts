@@ -87,9 +87,9 @@ describe('Tweets e2e test', () => {
 
     cy.get(`[data-cy="content"]`).type('withdrawal', { force: true }).invoke('val').should('match', new RegExp('withdrawal'));
 
-    cy.get(`[data-cy="createdAt"]`).type('2021-03-24T04:33').invoke('val').should('equal', '2021-03-24T04:33');
+    cy.get(`[data-cy="createdAt"]`).type('2021-03-30T17:14').invoke('val').should('equal', '2021-03-30T17:14');
 
-    cy.get(`[data-cy="updatedAt"]`).type('2021-03-24T15:41').invoke('val').should('equal', '2021-03-24T15:41');
+    cy.get(`[data-cy="updatedAt"]`).type('2021-03-31T04:22').invoke('val').should('equal', '2021-03-31T04:22');
 
     cy.setFieldSelectToLastOfEntity('customer');
 

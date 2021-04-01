@@ -11,9 +11,9 @@ import CustomerUpdateComponent from '@/entities/customer/customer-update.vue';
 import CustomerClass from '@/entities/customer/customer-update.component';
 import CustomerService from '@/entities/customer/customer.service';
 
-import TweetsService from '@/entities/tweets/tweets.service';
-
 import UserService from '@/admin/user-management/user-management.service';
+
+import TweetsService from '@/entities/tweets/tweets.service';
 
 const localVue = createLocalVue();
 
@@ -45,9 +45,9 @@ describe('Component Tests', () => {
         provide: {
           customerService: () => customerServiceStub,
 
-          tweetsService: () => new TweetsService(),
-
           userService: () => new UserService(),
+
+          tweetsService: () => new TweetsService(),
         },
       });
       comp = wrapper.vm;

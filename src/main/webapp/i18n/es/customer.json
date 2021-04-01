@@ -18,15 +18,14 @@
         "title": "Customer"
       },
       "id": "ID",
-      "slug": "Slug",
-      "createdAt": "Created At",
-      "updatedAt": "Updated At",
       "name": "Name",
       "phone": "Phone",
-      "tweets": "Tweets",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At",
       "user": "User",
+      "tweets": "Tweets",
       "follower": "Follower",
-      "followed": "Followed"
+      "following": "Following"
     }
   }
 }

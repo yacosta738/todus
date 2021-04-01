@@ -5,12 +5,13 @@ entity Tweets {
 }
 
 entity Customer {
-    slug String
+    name String required maxlength(60)
+    phone String pattern(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/)
     createdAt Instant,
     updatedAt Instant
 }
 
-relationship ManyToOne {
+relationship OneToOne {
     Customer{user(login)} to User
 }
 
@@ -18,7 +19,7 @@ relationship OneToMany {
     Customer to Tweets
 }
 relationship ManyToMany{
-	Customer{follower} to Customer{followed}
+	Customer{follower} to Customer{following}
 }
 // Use Data Transfer Objects (DTO)
 dto * with mapstruct
