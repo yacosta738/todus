@@ -14,10 +14,6 @@ public class CustomerDTO implements Serializable {
 
     private String id;
 
-    @NotNull
-    @Size(max = 60)
-    private String name;
-
     @Pattern(regexp = "^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\\s\\./0-9]*$")
     private String phone;
 
@@ -35,14 +31,6 @@ public class CustomerDTO implements Serializable {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getPhone() {
@@ -111,7 +99,6 @@ public class CustomerDTO implements Serializable {
     public String toString() {
         return "CustomerDTO{" +
             "id='" + getId() + "'" +
-            ", name='" + getName() + "'" +
             ", phone='" + getPhone() + "'" +
             ", createdAt='" + getCreatedAt() + "'" +
             ", updatedAt='" + getUpdatedAt() + "'" +

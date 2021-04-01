@@ -29,7 +29,6 @@
         <thead>
           <tr>
             <th scope="row"><span v-text="$t('global.field.id')">ID</span></th>
-            <th scope="row"><span v-text="$t('todusApp.customer.name')">Name</span></th>
             <th scope="row"><span v-text="$t('todusApp.customer.phone')">Phone</span></th>
             <th scope="row"><span v-text="$t('todusApp.customer.createdAt')">Created At</span></th>
             <th scope="row"><span v-text="$t('todusApp.customer.updatedAt')">Updated At</span></th>
@@ -43,7 +42,6 @@
             <td>
               <router-link :to="{ name: 'CustomerView', params: { customerId: customer.id } }">{{ customer.id }}</router-link>
             </td>
-            <td>{{ customer.name }}</td>
             <td>{{ customer.phone }}</td>
             <td>{{ customer.createdAt ? $d(Date.parse(customer.createdAt), 'short') : '' }}</td>
             <td>{{ customer.updatedAt ? $d(Date.parse(customer.updatedAt), 'short') : '' }}</td>

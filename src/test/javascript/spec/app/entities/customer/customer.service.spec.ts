@@ -33,7 +33,7 @@ describe('Service Tests', () => {
     beforeEach(() => {
       service = new CustomerService();
       currentDate = new Date();
-      elemDefault = new Customer('ID', 'AAAAAAA', 'AAAAAAA', currentDate, currentDate);
+      elemDefault = new Customer('ID', 'AAAAAAA', currentDate, currentDate);
     });
 
     describe('Service methods', () => {
@@ -99,7 +99,6 @@ describe('Service Tests', () => {
       it('should update a Customer', async () => {
         const returnedFromService = Object.assign(
           {
-            name: 'BBBBBB',
             phone: 'BBBBBB',
             createdAt: dayjs(currentDate).format(DATE_TIME_FORMAT),
             updatedAt: dayjs(currentDate).format(DATE_TIME_FORMAT),
@@ -135,7 +134,6 @@ describe('Service Tests', () => {
       it('should partial update a Customer', async () => {
         const patchObject = Object.assign(
           {
-            phone: 'BBBBBB',
             createdAt: dayjs(currentDate).format(DATE_TIME_FORMAT),
             updatedAt: dayjs(currentDate).format(DATE_TIME_FORMAT),
           },
@@ -171,7 +169,6 @@ describe('Service Tests', () => {
       it('should return a list of Customer', async () => {
         const returnedFromService = Object.assign(
           {
-            name: 'BBBBBB',
             phone: 'BBBBBB',
             createdAt: dayjs(currentDate).format(DATE_TIME_FORMAT),
             updatedAt: dayjs(currentDate).format(DATE_TIME_FORMAT),

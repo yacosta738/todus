@@ -2,12 +2,6 @@
   "name": "Customer",
   "fields": [
     {
-      "fieldName": "name",
-      "fieldType": "String",
-      "fieldValidateRules": ["required", "maxlength"],
-      "fieldValidateRulesMaxlength": "60"
-    },
-    {
       "fieldName": "phone",
       "fieldType": "String",
       "fieldValidateRules": ["pattern"],

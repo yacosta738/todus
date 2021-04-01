@@ -15,31 +15,6 @@
             <input type="text" class="form-control" id="id" name="id" v-model="customer.id" readonly />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="$t('todusApp.customer.name')" for="customer-name">Name</label>
-            <input
-              type="text"
-              class="form-control"
-              name="name"
-              id="customer-name"
-              data-cy="name"
-              :class="{ valid: !$v.customer.name.$invalid, invalid: $v.customer.name.$invalid }"
-              v-model="$v.customer.name.$model"
-              required
-            />
-            <div v-if="$v.customer.name.$anyDirty && $v.customer.name.$invalid">
-              <small class="form-text text-danger" v-if="!$v.customer.name.required" v-text="$t('entity.validation.required')">
-                This field is required.
-              </small>
-              <small
-                class="form-text text-danger"
-                v-if="!$v.customer.name.maxLength"
-                v-text="$t('entity.validation.maxlength', { max: 60 })"
-              >
-                This field cannot be longer than 60 characters.
-              </small>
-            </div>
-          </div>
-          <div class="form-group">
             <label class="form-control-label" v-text="$t('todusApp.customer.phone')" for="customer-phone">Phone</label>
             <input
               type="text"

@@ -25,11 +25,6 @@ public class Customer implements Serializable {
     @GeneratedValue(UUIDStringGenerator.class)
     private String id;
 
-    @NotNull
-    @Size(max = 60)
-    @Property("name")
-    private String name;
-
     @Pattern(regexp = "^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\\s\\./0-9]*$")
     @Property("phone")
     private String phone;
@@ -67,19 +62,6 @@ public class Customer implements Serializable {
     public Customer id(String id) {
         this.id = id;
         return this;
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
-    public Customer name(String name) {
-        this.name = name;
-        return this;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getPhone() {
@@ -243,7 +225,6 @@ public class Customer implements Serializable {
     public String toString() {
         return "Customer{" +
             "id=" + getId() +
-            ", name='" + getName() + "'" +
             ", phone='" + getPhone() + "'" +
             ", createdAt='" + getCreatedAt() + "'" +
             ", updatedAt='" + getUpdatedAt() + "'" +

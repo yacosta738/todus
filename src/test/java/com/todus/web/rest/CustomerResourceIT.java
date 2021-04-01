@@ -39,9 +39,6 @@ import org.springframework.test.web.servlet.MockMvc;
 @WithMockUser
 class CustomerResourceIT {
 
-    private static final String DEFAULT_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_NAME = "BBBBBBBBBB";
-
     private static final String DEFAULT_PHONE = "+(587";
     private static final String UPDATED_PHONE = "+(29";
 
@@ -78,11 +75,7 @@ class CustomerResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Customer createEntity() {
-        Customer customer = new Customer()
-            .name(DEFAULT_NAME)
-            .phone(DEFAULT_PHONE)
-            .createdAt(DEFAULT_CREATED_AT)
-            .updatedAt(DEFAULT_UPDATED_AT);
+        Customer customer = new Customer().phone(DEFAULT_PHONE).createdAt(DEFAULT_CREATED_AT).updatedAt(DEFAULT_UPDATED_AT);
         return customer;
     }
 
@@ -93,11 +86,7 @@ class CustomerResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Customer createUpdatedEntity() {
-        Customer customer = new Customer()
-            .name(UPDATED_NAME)
-            .phone(UPDATED_PHONE)
-            .createdAt(UPDATED_CREATED_AT)
-            .updatedAt(UPDATED_UPDATED_AT);
+        Customer customer = new Customer().phone(UPDATED_PHONE).createdAt(UPDATED_CREATED_AT).updatedAt(UPDATED_UPDATED_AT);
         return customer;
     }
 
@@ -120,7 +109,6 @@ class CustomerResourceIT {
         List<Customer> customerList = customerRepository.findAll();
         assertThat(customerList).hasSize(databaseSizeBeforeCreate + 1);
         Customer testCustomer = customerList.get(customerList.size() - 1);
-        assertThat(testCustomer.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testCustomer.getPhone()).isEqualTo(DEFAULT_PHONE);
         assertThat(testCustomer.getCreatedAt()).isEqualTo(DEFAULT_CREATED_AT);
         assertThat(testCustomer.getUpdatedAt()).isEqualTo(DEFAULT_UPDATED_AT);
@@ -145,23 +133,6 @@ class CustomerResourceIT {
     }
 
     @Test
-    void checkNameIsRequired() throws Exception {
-        int databaseSizeBeforeTest = customerRepository.findAll().size();
-        // set the field null
-        customer.setName(null);
-
-        // Create the Customer, which fails.
-        CustomerDTO customerDTO = customerMapper.toDto(customer);
-
-        restCustomerMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(customerDTO)))
-            .andExpect(status().isBadRequest());
-
-        List<Customer> customerList = customerRepository.findAll();
-        assertThat(customerList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
     void getAllCustomers() throws Exception {
         // Initialize the database
         customerRepository.save(customer);
@@ -171,7 +142,6 @@ class CustomerResourceIT {
             .perform(get(ENTITY_API_URL + "?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].phone").value(hasItem(DEFAULT_PHONE)))
             .andExpect(jsonPath("$.[*].createdAt").value(hasItem(DEFAULT_CREATED_AT.toString())))
             .andExpect(jsonPath("$.[*].updatedAt").value(hasItem(DEFAULT_UPDATED_AT.toString())));
@@ -187,7 +157,6 @@ class CustomerResourceIT {
             .perform(get(ENTITY_API_URL_ID, customer.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
             .andExpect(jsonPath("$.phone").value(DEFAULT_PHONE))
             .andExpect(jsonPath("$.createdAt").value(DEFAULT_CREATED_AT.toString()))
             .andExpect(jsonPath("$.updatedAt").value(DEFAULT_UPDATED_AT.toString()));
@@ -208,7 +177,7 @@ class CustomerResourceIT {
 
         // Update the customer
         Customer updatedCustomer = customerRepository.findById(customer.getId()).get();
-        updatedCustomer.name(UPDATED_NAME).phone(UPDATED_PHONE).createdAt(UPDATED_CREATED_AT).updatedAt(UPDATED_UPDATED_AT);
+        updatedCustomer.phone(UPDATED_PHONE).createdAt(UPDATED_CREATED_AT).updatedAt(UPDATED_UPDATED_AT);
         CustomerDTO customerDTO = customerMapper.toDto(updatedCustomer);
 
         restCustomerMockMvc
@@ -223,7 +192,6 @@ class CustomerResourceIT {
         List<Customer> customerList = customerRepository.findAll();
         assertThat(customerList).hasSize(databaseSizeBeforeUpdate);
         Customer testCustomer = customerList.get(customerList.size() - 1);
-        assertThat(testCustomer.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testCustomer.getPhone()).isEqualTo(UPDATED_PHONE);
         assertThat(testCustomer.getCreatedAt()).isEqualTo(UPDATED_CREATED_AT);
         assertThat(testCustomer.getUpdatedAt()).isEqualTo(UPDATED_UPDATED_AT);
@@ -302,7 +270,7 @@ class CustomerResourceIT {
         Customer partialUpdatedCustomer = new Customer();
         partialUpdatedCustomer.setId(customer.getId());
 
-        partialUpdatedCustomer.phone(UPDATED_PHONE);
+        partialUpdatedCustomer.createdAt(UPDATED_CREATED_AT);
 
         restCustomerMockMvc
             .perform(
@@ -316,9 +284,8 @@ class CustomerResourceIT {
         List<Customer> customerList = customerRepository.findAll();
         assertThat(customerList).hasSize(databaseSizeBeforeUpdate);
         Customer testCustomer = customerList.get(customerList.size() - 1);
-        assertThat(testCustomer.getName()).isEqualTo(DEFAULT_NAME);
-        assertThat(testCustomer.getPhone()).isEqualTo(UPDATED_PHONE);
-        assertThat(testCustomer.getCreatedAt()).isEqualTo(DEFAULT_CREATED_AT);
+        assertThat(testCustomer.getPhone()).isEqualTo(DEFAULT_PHONE);
+        assertThat(testCustomer.getCreatedAt()).isEqualTo(UPDATED_CREATED_AT);
         assertThat(testCustomer.getUpdatedAt()).isEqualTo(DEFAULT_UPDATED_AT);
     }
 
@@ -333,7 +300,7 @@ class CustomerResourceIT {
         Customer partialUpdatedCustomer = new Customer();
         partialUpdatedCustomer.setId(customer.getId());
 
-        partialUpdatedCustomer.name(UPDATED_NAME).phone(UPDATED_PHONE).createdAt(UPDATED_CREATED_AT).updatedAt(UPDATED_UPDATED_AT);
+        partialUpdatedCustomer.phone(UPDATED_PHONE).createdAt(UPDATED_CREATED_AT).updatedAt(UPDATED_UPDATED_AT);
 
         restCustomerMockMvc
             .perform(
@@ -347,7 +314,6 @@ class CustomerResourceIT {
         List<Customer> customerList = customerRepository.findAll();
         assertThat(customerList).hasSize(databaseSizeBeforeUpdate);
         Customer testCustomer = customerList.get(customerList.size() - 1);
-        assertThat(testCustomer.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testCustomer.getPhone()).isEqualTo(UPDATED_PHONE);
         assertThat(testCustomer.getCreatedAt()).isEqualTo(UPDATED_CREATED_AT);
         assertThat(testCustomer.getUpdatedAt()).isEqualTo(UPDATED_UPDATED_AT);

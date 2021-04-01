@@ -3,7 +3,6 @@ import { ITweets } from '@/shared/model/tweets.model';
 
 export interface ICustomer {
   id?: string;
-  name?: string;
   phone?: string | null;
   createdAt?: Date | null;
   updatedAt?: Date | null;
@@ -16,7 +15,6 @@ export interface ICustomer {
 export class Customer implements ICustomer {
   constructor(
     public id?: string,
-    public name?: string,
     public phone?: string | null,
     public createdAt?: Date | null,
     public updatedAt?: Date | null,

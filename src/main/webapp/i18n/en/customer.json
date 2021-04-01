@@ -18,7 +18,6 @@
         "title": "Customer"
       },
       "id": "ID",
-      "name": "Name",
       "phone": "Phone",
       "createdAt": "Created At",
       "updatedAt": "Updated At",

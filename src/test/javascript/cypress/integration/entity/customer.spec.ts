@@ -85,16 +85,11 @@ describe('Customer e2e test', () => {
     cy.get(entityCreateButtonSelector).click({ force: true });
     cy.getEntityCreateUpdateHeading('Customer');
 
-    cy.get(`[data-cy="name"]`)
-      .type('parse Towels Granite', { force: true })
-      .invoke('val')
-      .should('match', new RegExp('parse Towels Granite'));
+    cy.get(`[data-cy="phone"]`).type('++++(2)/4/', { force: true }).invoke('val').should('match', new RegExp('++++(2)/4/'));
 
-    cy.get(`[data-cy="phone"]`).type('+1.-39 ', { force: true }).invoke('val').should('match', new RegExp('+1.-39 '));
+    cy.get(`[data-cy="createdAt"]`).type('2021-03-31T09:15').invoke('val').should('equal', '2021-03-31T09:15');
 
-    cy.get(`[data-cy="createdAt"]`).type('2021-03-31T00:57').invoke('val').should('equal', '2021-03-31T00:57');
-
-    cy.get(`[data-cy="updatedAt"]`).type('2021-03-30T17:30').invoke('val').should('equal', '2021-03-30T17:30');
+    cy.get(`[data-cy="updatedAt"]`).type('2021-03-31T11:39').invoke('val').should('equal', '2021-03-31T11:39');
 
     cy.setFieldSelectToLastOfEntity('user');
 

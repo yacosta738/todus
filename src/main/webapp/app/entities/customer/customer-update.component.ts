@@ -1,6 +1,5 @@
 import { Component, Vue, Inject } from 'vue-property-decorator';
 
-import { required, maxLength } from 'vuelidate/lib/validators';
 import dayjs from 'dayjs';
 import { DATE_TIME_LONG_FORMAT } from '@/shared/date/filters';
 
@@ -14,10 +13,6 @@ import CustomerService from './customer.service';
 
 const validations: any = {
   customer: {
-    name: {
-      required,
-      maxLength: maxLength(60),
-    },
     phone: {},
     createdAt: {},
     updatedAt: {},

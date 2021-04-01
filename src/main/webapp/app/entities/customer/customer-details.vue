@@ -7,12 +7,6 @@
         </h2>
         <dl class="row jh-entity-details">
           <dt>
-            <span v-text="$t('todusApp.customer.name')">Name</span>
-          </dt>
-          <dd>
-            <span>{{ customer.name }}</span>
-          </dd>
-          <dt>
             <span v-text="$t('todusApp.customer.phone')">Phone</span>
           </dt>
           <dd>
