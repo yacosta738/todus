@@ -58,7 +58,7 @@
             presets: [SwaggerUIBundle.presets.apis, SwaggerUIStandalonePreset],
             plugins: [SwaggerUIBundle.plugins.DownloadUrl, AlwaysEnableTryItOutPlugin],
             requestInterceptor: function (req) {
-              var authToken = localStorage.getItem('todus-authenticationtoken') || sessionStorage.getItem('todus-authenticationToken');
+              var authToken = localStorage.getItem('todus-authenticationToken') || sessionStorage.getItem('todus-authenticationToken');
               if (authToken) {
                 req.headers['Authorization'] = 'Bearer ' + authToken;
               }

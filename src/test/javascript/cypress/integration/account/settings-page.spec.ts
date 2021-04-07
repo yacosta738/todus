@@ -5,7 +5,6 @@ describe('/account/settings', () => {
     cy.window().then(win => {
       win.sessionStorage.clear();
     });
-
     cy.clearCookies();
     cy.visit('');
     cy.login('user', 'user');

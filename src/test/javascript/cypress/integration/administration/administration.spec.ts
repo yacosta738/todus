@@ -5,7 +5,6 @@ describe('/admin', () => {
     cy.window().then(win => {
       win.sessionStorage.clear();
     });
-
     cy.clearCookies();
     cy.visit('');
     cy.login('admin', 'admin');

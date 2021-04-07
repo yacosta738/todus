@@ -1,8 +1,8 @@
 import { Component, Inject, Vue } from 'vue-property-decorator';
-import {VERSION} from "@/constants";
-import LoginService from "@/account/login.service";
-import TranslationService from "@/locale/translation.service";
-import AccountService from "@/account/account.service";
+import { VERSION } from '@/constants';
+import LoginService from '@/account/login.service';
+import AccountService from '@/account/account.service';
+import TranslationService from '@/locale/translation.service';
 
 @Component
 export default class JhiNavbar extends Vue {
@@ -43,7 +43,7 @@ export default class JhiNavbar extends Vue {
   }
 
   public openLogin(): void {
-    this.loginService().openLogin();
+    this.loginService().openLogin((<any>this).$root);
   }
 
   public get authenticated(): boolean {

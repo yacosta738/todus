@@ -14,7 +14,7 @@ services:
     ports:
       - 127.0.0.1:8080:8080
   todus-neo4j:
-    image: neo4j:4.2.3
+    image: neo4j:4.2.4
     # volumes:
     #   - ~/volumes/jhipster/Todus/neo4j/:/data
     environment:

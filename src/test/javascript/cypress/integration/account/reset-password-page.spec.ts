@@ -12,7 +12,6 @@ describe('forgot your password', () => {
     cy.window().then(win => {
       win.sessionStorage.clear();
     });
-
     cy.clearCookies();
     cy.visit('');
     cy.clickOnLoginItem();
