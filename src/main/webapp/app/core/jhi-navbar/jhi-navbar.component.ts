@@ -3,8 +3,9 @@ import { VERSION } from '@/constants';
 import LoginService from '@/account/login.service';
 import AccountService from '@/account/account.service';
 import TranslationService from '@/locale/translation.service';
+import UserProfileMenu from '@/core/user-profile-menu/user-profile-menu.vue';
 
-@Component
+@Component({ components: { UserProfileMenu } })
 export default class JhiNavbar extends Vue {
   @Inject('loginService')
   private loginService: () => LoginService;
@@ -43,7 +44,7 @@ export default class JhiNavbar extends Vue {
   }
 
   public openLogin(): void {
-    this.loginService().openLogin((<any>this).$root);
+    this.loginService().openLogin();
   }
 
   public get authenticated(): boolean {

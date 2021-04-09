@@ -5,18 +5,18 @@
     <div v-if="$store.getters.layout === 'simple-layout'">
       <router-view></router-view>
     </div>
-      <!-- container start -->
+    <!-- container start -->
     <div v-else class="flex justify-between items-start">
-      <left-menu></left-menu>
+      <jhi-navbar></jhi-navbar>
       <!-- middle column start -->
-      <div class="w-full py-0 border border-t-0 border-b-0 ">
-        <jhi-navbar></jhi-navbar>
+      <div class="w-full py-0 border border-t-0 border-b-0">
+        <toolbar />
         <router-view></router-view>
       </div>
       <!-- middle column end -->
       <right-menu></right-menu>
     </div>
-      <!-- container end -->
+    <!-- container end -->
   </div>
 </template>
 

@@ -41,6 +41,7 @@ import { faUserPlus } from '@fortawesome/free-solid-svg-icons/faUserPlus';
 import { faUsers } from '@fortawesome/free-solid-svg-icons/faUsers';
 import { faUsersCog } from '@fortawesome/free-solid-svg-icons/faUsersCog';
 import { faWrench } from '@fortawesome/free-solid-svg-icons/faWrench';
+import { faEllipsisH } from '@fortawesome/free-solid-svg-icons/faEllipsisH';
 
 import VueCookie from 'vue-cookie';
 import Vuelidate from 'vuelidate';
@@ -49,7 +50,7 @@ import Vue2Filters from 'vue2-filters';
 import * as filters from '@/shared/date/filters';
 import { accountStore } from '@/shared/config/store/account-store';
 import { translationStore } from '@/shared/config/store/translation-store';
-import {settingStore} from "@/shared/config/store/settings-store";
+import { settingStore } from '@/shared/config/store/settings-store';
 
 const dateTimeFormats: DateTimeFormats = {
   en: {
@@ -151,7 +152,8 @@ export function initFortAwesome(vue) {
     faUserPlus,
     faUsers,
     faUsersCog,
-    faWrench
+    faWrench,
+    faEllipsisH
   );
 }
 

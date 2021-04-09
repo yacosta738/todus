@@ -2,19 +2,19 @@ import Vue from 'vue';
 import Component from 'vue-class-component';
 import Ribbon from '@/core/ribbon/ribbon.vue';
 import JhiNavbar from '@/core/jhi-navbar/jhi-navbar.vue';
-import LeftMenu from '@/core/left-menu/left-menu.vue';
 import RightMenu from '@/core/right-menu/right-menu.vue';
 import LoginForm from '@/account/login/login.vue';
+import Toolbar from '@/core/toolbar/toolbar.vue';
 
 import '@/shared/config/dayjs';
-import TranslationService from "@/locale/translation.service";
+import TranslationService from '@/locale/translation.service';
 import { Inject } from 'vue-property-decorator';
 
 @Component({
   components: {
     ribbon: Ribbon,
-    LeftMenu,
     RightMenu,
+    Toolbar,
     'login-form': LoginForm,
     'jhi-navbar': JhiNavbar,
   },

@@ -42,7 +42,7 @@ export default class AccountService {
             if (sessionStorage.getItem('requested-url')) {
               this.router.replace(sessionStorage.getItem('requested-url'));
               sessionStorage.removeItem('requested-url');
-            }
+            } else this.router.replace('/home');
           } else {
             this.store.commit('logout');
             this.router.push('/', () => {});
